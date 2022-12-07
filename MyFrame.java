@@ -1,4 +1,4 @@
-import javax. swing.*;
+import javax.swing.*;
 import java.awt.*;
 
 	public class MyFrame extends JFrame{
@@ -16,10 +16,11 @@ import java.awt.*;
       btn = new JButton (playImg);
       btn.setBounds(450,350,100,50);
       
-      btn.setBorder(null);
       btn.setBorderPainted(false);
       btn.setContentAreaFilled(false);
       btn.setOpaque(false);
+      btn.setContentAreaFilled(false);
+      btn.setBorderPainted(false);
       
       ctn = getContentPane();
       ctn.setLayout(null);
