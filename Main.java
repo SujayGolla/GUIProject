@@ -1,6 +1,7 @@
 import javax.swing.*;
+import java.awt.*;
 
-class Main {
+public class Main {
   public static void main(String[] args) {
     JFrame frame = new JFrame("Township");
     Container cont = frame.getContentPane();

@@ -6,6 +6,7 @@ public class Mainmenu extends JPanel implements ActionListener{
 
   public Mainmenu(){
     this.setLayout(new GridLayout());
+    this.add(new ImageIcon("simtown_mainMenu.jpg"))
     btn = new JButton(new ImageIcon("play.png"));
     btn.setBounds(450,350,100,50);
     btn.setBorderPainted(false);
