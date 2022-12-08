@@ -28,4 +28,8 @@ public class Homepage extends JPanel {
         bottom.setLayout(null);
         bottom.setBackground(Color.BLACK);
     }
+
+    public void paintComponent(Graphics g){
+     super.paintComponent(g);
+   }
 }
