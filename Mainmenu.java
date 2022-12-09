@@ -1,14 +1,17 @@
+import javax.imageio.ImageIO;
 import javax.swing.*;
 import java.awt.*;
-import java.awt.event.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.awt.image.BufferedImage;
+import java.io.*;
 
-public class Mainmenu extends JPanel implements ActionListener{
+public class Mainmenu extends JPanel implements ActionListener {
   private JButton btn;
-  private ImageIcon img;
-  
-  public Mainmenu(){
-    this.setLayout(null);
-    img = new ImageIcon("simcity_mainMenu.jpg");
+  private BufferedImage menuBackground;
+
+  public Mainmenu() throws Exception{
+    this.setLayout(new GridLayout());
     btn = new JButton(new ImageIcon("play.png"));
     btn.setBounds(450,350,100,50);
     btn.setBorderPainted(false);
@@ -18,15 +21,16 @@ public class Mainmenu extends JPanel implements ActionListener{
     btn.setBorderPainted(false);
     this.add(btn);
     btn.addActionListener(this);
+
+    menuBackground = ImageIO.read(new File("simtown_mainMenu.jpg"));
   }
   public void paintComponent(Graphics g){
-     super.paintComponent(g);
-     g.drawImage(img.getImage(), 0, 10, 1000, 500, this);
+    super.paintComponent(g);
+    g.drawImage(menuBackground, 0,0, null);
   }
   public void actionPerformed(ActionEvent e){
     if (e.getSource() == btn){
-      Homepage p = new Homepage();
-      p.setVisible(true);
+      Cards.layout.show(Cards.c, "Homepage");
     }
   }
 }

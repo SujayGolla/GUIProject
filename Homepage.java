@@ -25,8 +25,9 @@ public class Homepage extends JPanel {
       bg.add(new JLabel(new ImageIcon("Township.jpg")));
 
       this.add(bottom, BorderLayout.SOUTH);
-      bottom.setLayout(null);
-      bottom.setBackground(Color.BLACK);
+      bottom.setLayout(new FlowLayout());
+      bottom.setBackground(Color.WHITE);
+      bottom.add(new Label("SALUT MES AMIS, JE SUIS FOU"));
   }
 
   public void paintComponent(Graphics g){
