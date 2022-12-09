@@ -1,12 +1,14 @@
 import javax.swing.*;
 import java.awt.*;
+import java.awt.event.*;
 
 public class Mainmenu extends JPanel implements ActionListener{
   private JButton btn;
-
+  private ImageIcon img;
+  
   public Mainmenu(){
-    this.setLayout(new GridLayout());
-    this.add(new ImageIcon("simtown_mainMenu.jpg"))
+    this.setLayout(null);
+    img = new ImageIcon("simcity_mainMenu.jpg");
     btn = new JButton(new ImageIcon("play.png"));
     btn.setBounds(450,350,100,50);
     btn.setBorderPainted(false);
@@ -19,6 +21,7 @@ public class Mainmenu extends JPanel implements ActionListener{
   }
   public void paintComponent(Graphics g){
      super.paintComponent(g);
+     g.drawImage(img.getImage(), 0, 10, 1000, 500, this);
   }
   public void actionPerformed(ActionEvent e){
     if (e.getSource() == btn){
