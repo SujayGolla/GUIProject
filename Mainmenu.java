@@ -22,7 +22,7 @@ public class Mainmenu extends JPanel implements ActionListener {
     this.add(btn);
     btn.addActionListener(this);
 
-    menuBackground = ImageIO.read(new File("simtown_mainMenu.jpg"));
+    menuBackground = ImageIO.read(new File("mMenu.jpg"));
   }
   public void paintComponent(Graphics g){
     super.paintComponent(g);
