@@ -6,19 +6,16 @@ public class Game{
     private static int coins;
     private static int cash;
     private static int population;
+    private static int maxPopulation;
 
-    public Game(){
-        try{
-            Scanner sc = new Scanner(new File("GameData.txt"));
-            lvl = Integer.parseInt(sc.nextLine().substring(8));
-            xp = Integer.parseInt(sc.nextLine().substring(5));
-            population = Integer.parseInt(sc.nextLine().substring(13));
-            coins = Integer.parseInt(sc.nextLine().substring(8));
-            cash = Integer.parseInt(sc.nextLine().substring(7));
-        } catch(Exception e){
-            System.out.println("error " + e);
-            System.exit(0);
-        }
+    public Game() throws Exception{
+        Scanner sc = new Scanner(new File("GameData.txt"));
+        lvl = Integer.parseInt(sc.nextLine().substring(1,2));
+        xp = Integer.parseInt(sc.nextLine().substring(2));
+        population = Integer.parseInt(sc.nextLine().substring(1));
+        coins = Integer.parseInt(sc.nextLine().substring(2));
+        cash = Integer.parseInt(sc.nextLine().substring(2));
+        maxPopulation = lvl * 15;
     }
 
     public static int getCash() {
@@ -61,8 +58,13 @@ public class Game{
         xp = x;
     }
 
+    public static int getMaxPopulation() {
+        return maxPopulation;
+    }
+
     public static void update(){
         lvl = (int)(xp/100.0);
         xp = xp%100;
+        maxPopulation = lvl * 15;
     }
 }

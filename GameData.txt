@@ -1,5 +1,5 @@
-Level = 1
-xp = 5
-population = 5
-Coins = 200
-Cash = 40
+L1
+XP5
+P5
+Co200
+Ca40
