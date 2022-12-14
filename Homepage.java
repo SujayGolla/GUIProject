@@ -1,4 +1,5 @@
 import javax.swing.*;
+import javax.swing.border.Border;
 import java.awt.*;
 
 public class Homepage extends JPanel {
@@ -14,10 +15,7 @@ public class Homepage extends JPanel {
 
       this.add(top, BorderLayout.NORTH);
       top.setLayout(new BorderLayout());
-      top.setBackground(Color.DARK_GRAY);
-      top.add(new Label("Third"), BorderLayout.EAST);
-      top.add(new Label("Second"), BorderLayout.CENTER);
-      top.add(new Label("First"), BorderLayout.WEST);
+      top.setBackground(new Color(0,0,0,65));
 
       this.add(bg, BorderLayout.CENTER);
       bg.setLayout(new GridLayout());
@@ -31,6 +29,9 @@ public class Homepage extends JPanel {
   }
 
   public void paintComponent(Graphics g){
-   super.paintComponent(g);
+      super.paintComponent(g);
+      Graphics2D g2 = (Graphics2D) g;
+      g2.fillRoundRect(10, 20, 50, 20, 5,5);
+      g2.fillRoundRect(10,20,(int)(20*(Game.getXp() / Game.getLvl()*100.0)), 20, 5, 5);
  }
 }
