@@ -29,10 +29,9 @@ public class Mainmenu extends JPanel implements ActionListener {
     super.paintComponent(g);
     g.drawImage(menuBackground, 0,0, null);
   }
-  public void actionPerformed(ActionEvent e) throws Exception{
-    Cards cards = new Cards();
+  public void actionPerformed(ActionEvent e) {
     if (e.getSource() == btn){
-      cards.flipToCard("Homepage");
+      Cards.flipToCard("Homepage");
     }
   }
 }

@@ -1,13 +1,12 @@
 import javax.swing.*;
-import javax.swing.border.Border;
 import java.awt.*;
 
 public class Homepage extends JPanel {
-  private JPanel bg;
+  private JPanel center;
   private JPanel bottom;
   private JPanel top;
   public Homepage(){
-      bg = new JPanel();
+      center = new JPanel();
       bottom = new JPanel();
       top = new JPanel();
 
@@ -16,22 +15,24 @@ public class Homepage extends JPanel {
       this.add(top, BorderLayout.NORTH);
       top.setLayout(new BorderLayout());
       top.setBackground(new Color(0,0,0,65));
+      top.setOpaque(false);
+      top.add(new JLabel(new ImageIcon("Untitled.png")));
 
-      this.add(bg, BorderLayout.CENTER);
-      bg.setLayout(new GridLayout());
-      bg.setBackground(Color.GRAY);
-      bg.add(new JLabel(new ImageIcon("Township.jpg")));
+      this.add(center, BorderLayout.CENTER);
+      center.setLayout(new GridLayout());
+      center.setBackground(Color.GRAY);
 
       this.add(bottom, BorderLayout.SOUTH);
       bottom.setLayout(new FlowLayout());
       bottom.setBackground(Color.WHITE);
-      bottom.add(new Label("SALUT MES AMIS, JE SUIS FOU"));
+      bottom.add(new Label("SALUT MES AMIS"));
   }
 
   public void paintComponent(Graphics g){
       super.paintComponent(g);
-      Graphics2D g2 = (Graphics2D) g;
-      g2.fillRoundRect(10, 20, 50, 20, 5,5);
-      g2.fillRoundRect(10,20,(int)(20*(Game.getXp() / Game.getLvl()*100.0)), 20, 5, 5);
+      g.setColor(Color.darkGray);
+      g.fillRoundRect(10,10,100,30,20,20);
+      g.setColor(Color.lightGray);
+      g.fillRoundRect(10,10, Game.getXp(), 30,20,20);
  }
 }
