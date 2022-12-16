@@ -21,16 +21,5 @@ public class Cards extends JFrame{
 
     public static void flipToCard(String cardID){
         layout.show(c, cardID);
-
-        /*
-        if(cardID.equals("Main Menu")){
-            m.requestFocusInWindow();
-        }
-        else if(cardID.equals("Homepage")){
-            h.requestFocusInWindow();
-        }
-
-
-         */
     }
 }
