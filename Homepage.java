@@ -1,10 +1,13 @@
 import javax.swing.*;
 import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 
-public class Homepage extends JPanel {
+public class Homepage extends JPanel implements ActionListener {
   private JPanel center;
   private JPanel bottom;
   private JPanel top;
+  private JButton shop;
   public Homepage(){
       try {
           new Game();
@@ -14,6 +17,12 @@ public class Homepage extends JPanel {
       center = new JPanel();
       bottom = new JPanel();
       top = new JPanel();
+
+      shop = new JButton(new ImageIcon("shop.png"));
+      shop.setBorderPainted(false);
+      shop.setContentAreaFilled(false);
+      shop.setOpaque(false);
+      shop.addActionListener(this);
 
       this.setLayout(new BorderLayout());
 
@@ -28,9 +37,9 @@ public class Homepage extends JPanel {
       center.setBackground(Color.GRAY);
 
       this.add(bottom, BorderLayout.SOUTH);
-      bottom.setLayout(new FlowLayout());
+      bottom.setLayout(new BorderLayout());
       bottom.setBackground(Color.WHITE);
-      bottom.add(new Label("SALUT MES AMIS"));
+      bottom.add(shop, BorderLayout.EAST);
   }
 
   public void paintComponent(Graphics g){
@@ -62,7 +71,9 @@ public class Homepage extends JPanel {
       g.drawString(Game.getPopulation() + "/" + Game.getMaxPopulation(), 78,78);
       g.drawString(""+Game.getCoins(), 885, 38);
       g.drawString(""+Game.getCash(), 885, 78);
-
-
+ }
+ public void actionPerformed(ActionEvent e){
+      if(e.getSource() == shop)
+          Cards.flipToCard("Shop");
  }
 }

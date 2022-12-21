@@ -7,19 +7,17 @@ import java.awt.image.BufferedImage;
 import java.io.*;
 import java.lang.Exception;
 
-public class Mainmenu extends JPanel implements ActionListener {
+public class MainMenu extends JPanel implements ActionListener {
   private JButton btn;
   private BufferedImage menuBackground;
 
-  public Mainmenu() throws Exception{
+  public MainMenu() throws Exception{
     this.setLayout(new GridLayout());
     btn = new JButton(new ImageIcon("play.png"));
     btn.setBounds(450,350,100,50);
     btn.setBorderPainted(false);
     btn.setContentAreaFilled(false);
     btn.setOpaque(false);
-    btn.setContentAreaFilled(false);
-    btn.setBorderPainted(false);
     this.add(btn);
     btn.addActionListener(this);
 

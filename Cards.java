@@ -1,22 +1,25 @@
 import javax.swing.*;
 import java.awt.*;
-import java.awt.event.*;
+
 public class Cards extends JFrame{
     static CardLayout layout;
     static Container c;
-    static Mainmenu m;
+    static MainMenu m;
     static Homepage h;
+    static Shop s;
 
     public Cards() throws Exception{
         c = getContentPane();
         layout = new CardLayout();
         c.setLayout(layout);
 
-        m = new Mainmenu();
+        m = new MainMenu();
         h = new Homepage();
+        s = new Shop();
 
-        c.add("Main Menu", m);
+        c.add("MainMenu", m);
         c.add("Homepage", h);
+        c.add("Shop", s);
     }
 
     public static void flipToCard(String cardID){
