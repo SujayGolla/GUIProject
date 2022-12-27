@@ -29,15 +29,19 @@ public class Shop extends JPanel implements ActionListener{
 
         navBar = new JPanel();
         navBar.setLayout(new GridLayout(1,8));
-        titleN = new JPanel();
-        titleN.setLayout(new BorderLayout());
         n = new JPanel();
         n.setLayout(new BorderLayout());
-        n.setBackground(Color.WHITE);
+        n.setBackground(Color.GRAY);
+        titleN = new JPanel();
+        titleN.setLayout(new BorderLayout());
+        titleN.setBackground(Color.LIGHT_GRAY);
 
         n.add(titleN, BorderLayout.NORTH);
         title = new JLabel("Shop");
         title.setFont(new Font("Times New Roman", Font.BOLD, 30));
+        Dimension size = title.getPreferredSize();
+        title.setBounds(450, 30,size.width,size.height);
+        back.setBounds(15,15,30,20);
         titleN.add(back, BorderLayout.WEST);
         titleN.add(title, BorderLayout.CENTER);
 
@@ -63,6 +67,7 @@ public class Shop extends JPanel implements ActionListener{
         b.addActionListener(this);
     }
     public void actionPerformed(ActionEvent e){
-
+        if(e.getSource() == back)
+            Cards.flipToCard("Homepage");
     }
 }

@@ -56,7 +56,7 @@ public class Homepage extends JPanel implements ActionListener {
       g2.fillRoundRect(850,20,100,25,20,20);
       g2.fillRoundRect(850,60,100,25,20,20);
 
-      g2.setPaint(new GradientPaint(50, 20, new Color(23,255,198), 50+Game.getXp()%100, 45, new Color(3,68,140)));
+      g2.setPaint(new GradientPaint(50, 20, new Color(8, 238, 179), 50+Game.getXp()%100, 45, new Color(0, 69, 146)));
       g2.fillRoundRect(50,20, Game.getXp()%100, 25,20,20);
       g2.fillRoundRect(50,60, Game.getPopulation()*100 / Game.getMaxPopulation(), 25,20,20);
 
