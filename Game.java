@@ -62,9 +62,12 @@ public class Game{
         return maxPopulation;
     }
 
-    public static void update(){
+    public static void update() throws Exception {
         lvl = (int)(xp/100.0);
-        xp = xp%100;
         maxPopulation = lvl * 15;
+        new FileWriter("GameData.txt", false).close();
+        FileWriter gameData = new FileWriter("GameData.txt");
+        gameData.write("L"+lvl + "\nXP" + xp + "\nP" + population + "\nCo" + coins + "\nCa" + cash);
+        gameData.close();
     }
 }

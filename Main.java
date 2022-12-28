@@ -6,6 +6,6 @@ public class Main {
     game.setSize(1000,500);
     game.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
     game.setVisible(true);
-    game.setResizable(true);
+    game.setResizable(false);
   }
 }
