@@ -74,18 +74,17 @@ public class Shop extends JPanel implements ActionListener{
         c.setBackground(Color.WHITE);
 
         JPanel cHou = new JPanel();
+        cHou.setLayout(new GridLayout(1, housesArray.length));
         JPanel cFac = new JPanel();
+        cFac.setLayout(new GridLayout(1, factoriesArray.length));
         JPanel cFar = new JPanel();
+        cFar.setLayout(new GridLayout(1, farmsArray.length));
         JPanel cCro = new JPanel();
+        cCro.setLayout(new GridLayout(1, cropsArray.length));
         JPanel cBas = new JPanel();
+        cBas.setLayout(new GridLayout(1, basicsArray.length));
         JPanel cSpe = new JPanel();
-
-        setupCenterPanels(cHou, "Houses", housesArray.length);
-        setupCenterPanels(cFac, "Factories", factoriesArray.length);
-        setupCenterPanels(cFar, "Farming", farmsArray.length);
-        setupCenterPanels(cCro, "Crops", cropsArray.length);
-        setupCenterPanels(cBas, "Basics", basicsArray.length);
-        setupCenterPanels(cSpe, "Specials", specialsArray.length);
+        cSpe.setLayout(new GridLayout(1, specialsArray.length));
 
         addShopItemsToPanels(cHou, housesArray);
         addShopItemsToPanels(cFac, factoriesArray);
@@ -93,17 +92,24 @@ public class Shop extends JPanel implements ActionListener{
         addShopItemsToPanels(cCro, cropsArray);
         addShopItemsToPanels(cBas, basicsArray);
         addShopItemsToPanels(cSpe, specialsArray);
+
+        setupCenterPanels(cHou, "Houses", housesArray.length);
+        setupCenterPanels(cFac, "Factories", factoriesArray.length);
+        setupCenterPanels(cFar, "Farming", farmsArray.length);
+        setupCenterPanels(cCro, "Crops", cropsArray.length);
+        setupCenterPanels(cBas, "Basics", basicsArray.length);
+        setupCenterPanels(cSpe, "Specials", specialsArray.length);
     }
     public void addShopItemsToPanels(JPanel p, ShopItem[] array){
         for(ShopItem i : array){
-            if(i.isUnlocked())
+            if(i.isUnlocked()) {
                 displayUnlockedItems(i, p, 30,25);
-            else
+            } else {
                 displayLockedItems(i, p, 30, 25);
+            }
         }
     }
     public void setupCenterPanels(JPanel p, String ID, int col){
-        p.setLayout(new GridLayout(1, col));
         JScrollPane scrollPane = new JScrollPane(p);
         scrollPane.setHorizontalScrollBarPolicy(JScrollPane.HORIZONTAL_SCROLLBAR_ALWAYS);
         scrollPane.setBackground(new Color(210, 147, 64));
@@ -146,6 +152,7 @@ public class Shop extends JPanel implements ActionListener{
         JLabel box = new JLabel(new ImageIcon("ShopItemDisplayBox.png"));
         box.setBounds(x,y,300,350);
         p.add(box);
+
         panel.add(p);
     }
     public void displayLockedItems(ShopItem s, JPanel panel, int x, int y){
