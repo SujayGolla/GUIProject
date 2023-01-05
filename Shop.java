@@ -15,6 +15,7 @@ public class Shop extends JPanel implements ActionListener{
     private final ShopItem[] basicsArray = {new ShopItem("Roads", 0, new ImageIcon("Road.png"), null, 1), new ShopItem("Gravel", 0, new ImageIcon("Gravel.png"), null, 1), new ShopItem("Tiles", 0, new ImageIcon("Tiles.png"), null, 1)};
     private final ShopItem[] specialsArray = {new ShopItem("Barn", 0, new ImageIcon("Barn.png"), null, 1), new ShopItem("Townhall", 0, new ImageIcon("Townhall.png"), null, 2), new ShopItem("Fountain", 200, new ImageIcon("Fountain.png"), null, 3)};
     private final ShopItem[][] shop = {housesArray, factoriesArray, farmsArray, cropsArray, basicsArray, specialsArray};
+    private int cnt = 0;
     public Shop(){
         this.setLayout(new BorderLayout());
         this.setBackground(Color.GRAY);
@@ -73,32 +74,44 @@ public class Shop extends JPanel implements ActionListener{
         c.setLayout(layout);
         c.setBackground(Color.WHITE);
 
-        JPanel cHou = new JPanel();
-        cHou.setLayout(new GridLayout(1, housesArray.length));
-        JPanel cFac = new JPanel();
-        cFac.setLayout(new GridLayout(1, factoriesArray.length));
-        JPanel cFar = new JPanel();
-        cFar.setLayout(new GridLayout(1, farmsArray.length));
-        JPanel cCro = new JPanel();
-        cCro.setLayout(new GridLayout(1, cropsArray.length));
-        JPanel cBas = new JPanel();
-        cBas.setLayout(new GridLayout(1, basicsArray.length));
-        JPanel cSpe = new JPanel();
-        cSpe.setLayout(new GridLayout(1, specialsArray.length));
+        JPanel cHou = new JPanel(null);
+        JPanel cFac = new JPanel(null);
+        JPanel cFar = new JPanel(null);
+        JPanel cCro = new JPanel(null);
+        JPanel cBas = new JPanel(null);
+        JPanel cSpe = new JPanel(null);
 
         addShopItemsToPanels(cHou, housesArray);
+        cnt = 0;
         addShopItemsToPanels(cFac, factoriesArray);
+        cnt = 0;
         addShopItemsToPanels(cFar, farmsArray);
+        cnt = 0;
         addShopItemsToPanels(cCro, cropsArray);
+        cnt = 0;
         addShopItemsToPanels(cBas, basicsArray);
+        cnt = 0;
         addShopItemsToPanels(cSpe, specialsArray);
 
-        setupCenterPanels(cHou, "Houses", housesArray.length);
-        setupCenterPanels(cFac, "Factories", factoriesArray.length);
-        setupCenterPanels(cFar, "Farming", farmsArray.length);
-        setupCenterPanels(cCro, "Crops", cropsArray.length);
-        setupCenterPanels(cBas, "Basics", basicsArray.length);
-        setupCenterPanels(cSpe, "Specials", specialsArray.length);
+
+        JScrollPane scrollPaneCHou = new JScrollPane(cHou, ScrollPaneConstants.VERTICAL_SCROLLBAR_NEVER, ScrollPaneConstants.HORIZONTAL_SCROLLBAR_ALWAYS);
+        scrollPaneCHou.setPreferredSize(new Dimension(3500, 350));
+        c.add(scrollPaneCHou, "Houses");
+        JScrollPane scrollPaneCFac = new JScrollPane(cFac, ScrollPaneConstants.VERTICAL_SCROLLBAR_NEVER, ScrollPaneConstants.HORIZONTAL_SCROLLBAR_ALWAYS);
+        scrollPaneCFac.setPreferredSize(new Dimension(3500, 350));
+        c.add(scrollPaneCFac, "Factories");
+        JScrollPane scrollPaneCFar = new JScrollPane(cFar, ScrollPaneConstants.VERTICAL_SCROLLBAR_NEVER, ScrollPaneConstants.HORIZONTAL_SCROLLBAR_ALWAYS);
+        scrollPaneCFar.setPreferredSize(new Dimension(3500, 350));
+        c.add(scrollPaneCFar, "Farming");
+        JScrollPane scrollPaneCCro = new JScrollPane(cCro, ScrollPaneConstants.VERTICAL_SCROLLBAR_NEVER, ScrollPaneConstants.HORIZONTAL_SCROLLBAR_ALWAYS);
+        scrollPaneCCro.setPreferredSize(new Dimension(3500, 350));
+        c.add(scrollPaneCCro, "Crops");
+        JScrollPane scrollPaneCBas = new JScrollPane(cBas, ScrollPaneConstants.VERTICAL_SCROLLBAR_NEVER, ScrollPaneConstants.HORIZONTAL_SCROLLBAR_ALWAYS);
+        scrollPaneCBas.setPreferredSize(new Dimension(3500, 350));
+        c.add(scrollPaneCBas, "Basics");
+        JScrollPane scrollPaneCSpe = new JScrollPane(cSpe, ScrollPaneConstants.VERTICAL_SCROLLBAR_NEVER, ScrollPaneConstants.HORIZONTAL_SCROLLBAR_ALWAYS);
+        scrollPaneCSpe.setPreferredSize(new Dimension(3500, 350));
+        c.add(scrollPaneCSpe, "Specials");
     }
     public void addShopItemsToPanels(JPanel p, ShopItem[] array){
         for(ShopItem i : array){
@@ -108,12 +121,6 @@ public class Shop extends JPanel implements ActionListener{
                 displayLockedItems(i, p, 30, 25);
             }
         }
-    }
-    public void setupCenterPanels(JPanel p, String ID, int col){
-        JScrollPane scrollPane = new JScrollPane(p);
-        scrollPane.setHorizontalScrollBarPolicy(JScrollPane.HORIZONTAL_SCROLLBAR_ALWAYS);
-        scrollPane.setBackground(new Color(210, 147, 64));
-        c.add(ID, scrollPane);
     }
     public void centerFlipToCard(String ID){
         layout.show(c, ID);
@@ -153,6 +160,8 @@ public class Shop extends JPanel implements ActionListener{
         box.setBounds(x,y,300,350);
         p.add(box);
 
+        p.setBounds(350*cnt++, 0, 350, 400);
+
         panel.add(p);
     }
     public void displayLockedItems(ShopItem s, JPanel panel, int x, int y){
@@ -185,6 +194,8 @@ public class Shop extends JPanel implements ActionListener{
         JLabel box = new JLabel(new ImageIcon("ShopItemDisplayBoxLocked.png"));
         box.setBounds(x,y,300,350);
         p.add(box);
+
+        p.setBounds(350*cnt++, 0, 350, 400);
 
         panel.add(p);
     }
