@@ -1,5 +1,4 @@
 import javax.swing.*;
-import javax.swing.plaf.DimensionUIResource;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -11,7 +10,7 @@ public class Shop extends JPanel implements ActionListener{
     private final ShopItem[] housesArray = {new ShopItem("Townhouse", 50, new ImageIcon("Townhouse.png"), null, 1), new ShopItem("Bungalow", 30, new ImageIcon("Bungalow.png"), null, 2), new ShopItem("Apartment", 150, new ImageIcon("Apartment.png"), null, 4), new ShopItem("Condos", 300, new ImageIcon("Condo.png"), null, 8)};
     private final ShopItem[] factoriesArray = {new ShopItem("Feed Mill", 50, new ImageIcon("Feedmill.png"), null, 1), new ShopItem("Dairy Factory", 50, new ImageIcon("Dairy.png"), null, 2), new ShopItem("Textile Factory", 100, new ImageIcon("Textile.png"), null, 4), new ShopItem("Meat Production", 150, new ImageIcon("Meat.png"), null, 5), new ShopItem("Bakery", 200, new ImageIcon("Bakery.png"), null, 7), new ShopItem("Fast Food Restaurant", 300, new ImageIcon("Fastfood.png"), null, 9)};
     private final ShopItem[] farmsArray = {new ShopItem("Cowshed", 50, new ImageIcon("Cowshed.png"), null, 1), new ShopItem("Chicken Coop", 150, new ImageIcon("Chicken.png"), null, 2), new ShopItem("Sheep Farm", 300, new ImageIcon("Sheep.png"), null, 5)};
-    private final ShopItem[] cropsArray = {new ShopItem("Wheat", 5, new ImageIcon("Wheat.png"), null, 1), new ShopItem("Corn", 5, new ImageIcon("Corn.png"), null, 2), new ShopItem("Rice", 5, new ImageIcon("Rice.png"), null, 4), new ShopItem("Apples", 10, new ImageIcon("Apples.png"), null, 5), new ShopItem("Strawberry", 10, new ImageIcon("Strawberry.png"), null, 6), new ShopItem("Cotton", 5, new ImageIcon("Cotton.png"), null, 2), new ShopItem("Carrot", 5, new ImageIcon("Carrot.png"), null, 1), new ShopItem("Tomatoes", 5, new ImageIcon("Tomato.png"), null, 3)};
+    private final ShopItem[] cropsArray = {new ShopItem("Wheat", 5, new ImageIcon("Wheat.png"), null, 1), new ShopItem("Carrot", 5, new ImageIcon("Carrot.png"), null, 1), new ShopItem("Corn", 5, new ImageIcon("Corn.png"), null, 2), new ShopItem("Rice", 5, new ImageIcon("Rice.png"), null, 4), new ShopItem("Apples", 10, new ImageIcon("Apples.png"), null, 5), new ShopItem("Strawberry", 10, new ImageIcon("Strawberry.png"), null, 6), new ShopItem("Cotton", 5, new ImageIcon("Cotton.png"), null, 2), new ShopItem("Tomatoes", 5, new ImageIcon("Tomato.png"), null, 3)};
     private final ShopItem[] basicsArray = {new ShopItem("Roads", 0, new ImageIcon("Road.png"), null, 1), new ShopItem("Gravel", 0, new ImageIcon("Gravel.png"), null, 1), new ShopItem("Tiles", 0, new ImageIcon("Tiles.png"), null, 1)};
     private final ShopItem[] specialsArray = {new ShopItem("Barn", 0, new ImageIcon("Barn.png"), null, 1), new ShopItem("Townhall", 0, new ImageIcon("Townhall.png"), null, 2), new ShopItem("Fountain", 200, new ImageIcon("Fountain.png"), null, 3)};
     private final ShopItem[][] shop = {housesArray, factoriesArray, farmsArray, cropsArray, basicsArray, specialsArray};
@@ -74,12 +73,12 @@ public class Shop extends JPanel implements ActionListener{
         c.setLayout(layout);
         c.setBackground(Color.WHITE);
 
-        JPanel cHou = new JPanel(null);
-        JPanel cFac = new JPanel(null);
-        JPanel cFar = new JPanel(null);
-        JPanel cCro = new JPanel(null);
-        JPanel cBas = new JPanel(null);
-        JPanel cSpe = new JPanel(null);
+        JPanel cHou = new JPanel(new GridLayout(1, housesArray.length + 1));
+        JPanel cFac = new JPanel(new GridLayout(1, factoriesArray.length + 1));
+        JPanel cFar = new JPanel(new GridLayout(1, farmsArray.length + 1));
+        JPanel cCro = new JPanel(new GridLayout(1, cropsArray.length + 1));
+        JPanel cBas = new JPanel(new GridLayout(1, basicsArray.length + 1));
+        JPanel cSpe = new JPanel(new GridLayout(1, specialsArray.length + 1));
 
         addShopItemsToPanels(cHou, housesArray);
         cnt = 0;
@@ -114,6 +113,7 @@ public class Shop extends JPanel implements ActionListener{
         c.add(scrollPaneCSpe, "Specials");
     }
     public void addShopItemsToPanels(JPanel p, ShopItem[] array){
+        p.add(new JLabel(new ImageIcon("Untitled(1).png")));
         for(ShopItem i : array){
             if(i.isUnlocked()) {
                 displayUnlockedItems(i, p, 30,25);
