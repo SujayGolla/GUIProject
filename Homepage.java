@@ -7,7 +7,7 @@ public class Homepage extends JPanel implements ActionListener {
   private JPanel center;
   private JPanel bottom;
   private JPanel top;
-  private JButton shop;
+  private JButton shop, inventory;
   public Homepage(){
       try {
           new Game();
@@ -23,6 +23,12 @@ public class Homepage extends JPanel implements ActionListener {
       shop.setContentAreaFilled(false);
       shop.setOpaque(false);
       shop.addActionListener(this);
+
+      inventory = new JButton(new ImageIcon("inventory.png"));
+      inventory.setBorderPainted(false);
+      inventory.setContentAreaFilled(false);
+      inventory.setOpaque(false);
+      inventory.addActionListener(this);
 
       this.setLayout(new BorderLayout());
 
@@ -40,6 +46,7 @@ public class Homepage extends JPanel implements ActionListener {
       bottom.setLayout(new BorderLayout());
       bottom.setBackground(Color.WHITE);
       bottom.add(shop, BorderLayout.EAST);
+      bottom.add(inventory, BorderLayout.WEST);
   }
 
   public void paintComponent(Graphics g){
@@ -75,5 +82,7 @@ public class Homepage extends JPanel implements ActionListener {
  public void actionPerformed(ActionEvent e){
       if(e.getSource() == shop)
           Cards.flipToCard("Shop");
+      else if(e.getSource() == inventory)
+          Cards.flipToCard("Inventory");
  }
 }
