@@ -8,9 +8,9 @@ public class Shop extends JPanel implements ActionListener{
     private JPanel n, c;
     private JButton factories, houses, farming, basics, special, crops, back;
     private CardLayout layout;
-    private final ShopItem[] housesArray = {ShopItem.getShopItem("Townhouse"), ShopItem.getShopItem("Bungalow"), ShopItem.getShopItem("Apartment"), ShopItem.getShopItem("Condos")};
+    private final ShopItem[] housesArray = {ShopItem.getShopItem("Bungalow"), ShopItem.getShopItem("Townhouse"), ShopItem.getShopItem("Apartment"), ShopItem.getShopItem("Condos")};
     private final ShopItem[] factoriesArray = {ShopItem.getShopItem("Feed Mill"), ShopItem.getShopItem("Dairy Factory"), ShopItem.getShopItem("Textile Factory"), ShopItem.getShopItem("Meat Production"), ShopItem.getShopItem("Bakery"), ShopItem.getShopItem("Fast Food Restaurant")};
-    private final ShopItem[] farmsArray = {ShopItem.getShopItem("Cowshed"), ShopItem.getShopItem("Chicken Coop"), ShopItem.getShopItem("Sheep Farm")};
+    private final ShopItem[] farmsArray = {ShopItem.getShopItem("Field"), ShopItem.getShopItem("Cowshed"), ShopItem.getShopItem("Chicken Coop"), ShopItem.getShopItem("Sheep Farm")};
     private final ShopItem[] cropsArray = {ShopItem.getShopItem("Wheat"), ShopItem.getShopItem("Carrot"), ShopItem.getShopItem("Corn"), ShopItem.getShopItem("Tomatoes"), ShopItem.getShopItem("Rice"), ShopItem.getShopItem("Apples"), ShopItem.getShopItem("Strawberry"), ShopItem.getShopItem("Cotton")};
     private final ShopItem[] basicsArray = {ShopItem.getShopItem("Roads"), ShopItem.getShopItem("Gravel"), ShopItem.getShopItem("Tiles")};
     private final ShopItem[] specialsArray = {ShopItem.getShopItem("Barn"), ShopItem.getShopItem("Townhall"), ShopItem.getShopItem("Fountain")};
@@ -153,14 +153,28 @@ public class Shop extends JPanel implements ActionListener{
         JLabel price = new JLabel(s.getPrice() + "", new ImageIcon("shopCoin.png"), JLabel.CENTER);
         price.setFont(new Font("Times New Roman", Font.BOLD, 18));
         sizePrice = price.getPreferredSize();
-        price.setBounds(x+150-(sizePrice.width / 2), y+30+sizeTitle.height+15+200+5, sizePrice.width, sizePrice.height);
+        price.setBounds(x+75-(sizePrice.width / 2), y+30+sizeTitle.height+15+200-5+((y+350 - (y+30+sizeTitle.height+15+200-5))/2)-(sizePrice.height/2), sizePrice.width, sizePrice.height);
         p.add(price);
+
+        if(HouseItem.isHouse(s.getName())){
+            JLabel numPpl = new JLabel("+" + s.getPpl(),new ImageIcon("shopPopulation.png"), JLabel.CENTER);
+            numPpl.setFont(new Font("Times New Roman", Font.BOLD, 14));
+            Dimension sizeNumPpl = numPpl.getPreferredSize();
+            numPpl.setBounds(x+150-(sizeNumPpl.width / 2), y+30+sizeTitle.height+15+200-5+((y+350 - (y+30+sizeTitle.height+15+200-5))/2)-(sizePrice.height/2), sizeNumPpl.width, sizeNumPpl.height);
+            p.add(numPpl);
+        } else if(FactoryItem.isFactory(s.getName()) || FarmItem.isFarm(s.getName())){
+            JLabel reqPpl = new JLabel("Needs " + s.getReqPpl(),new ImageIcon("shopPopulation.png"), JLabel.CENTER);
+            reqPpl.setFont(new Font("Times New Roman", Font.BOLD, 8));
+            Dimension sizeReqPpl = reqPpl.getPreferredSize();
+            reqPpl.setBounds(x+150-(sizeReqPpl.width / 2)-5, y+30+sizeTitle.height+15+200-5+((y+350 - (y+30+sizeTitle.height+15+200-5))/2)-(sizePrice.height/2), sizeReqPpl.width, sizeReqPpl.height);
+            p.add(reqPpl);
+        }
 
         JButton buy = new JButton(new ImageIcon("buy.png"));
         buy.setName(s.getName() + " Buy");
         defaultButtonSetup(buy);
         sizeBuy = buy.getPreferredSize();
-        buy.setBounds(x+150-(sizeBuy.width / 2), y+350-sizeBuy.height-10, sizeBuy.width, sizeBuy.height);
+        buy.setBounds(x+225-(sizeBuy.width / 2), y+30+sizeTitle.height+15+200-5+((y+350 - (y+30+sizeTitle.height+15+200-5))/2)-(sizeBuy.height/2), sizeBuy.width, sizeBuy.height);
         p.add(buy);
 
         JLabel box = new JLabel(new ImageIcon("ShopItemDisplayBox.png"));
@@ -251,7 +265,8 @@ public class Shop extends JPanel implements ActionListener{
                         }
                         try {
                             s.purchaseItem();
-                            Inventory.addShopItem(s, category);
+                            if(s.canBuyItem())
+                                Inventory.addShopItem(s, category);
                         } catch (Exception ex) {
                             throw new RuntimeException(ex);
                         }

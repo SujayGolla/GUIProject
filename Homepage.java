@@ -24,7 +24,7 @@ public class Homepage extends JPanel implements ActionListener {
       shop.setOpaque(false);
       shop.addActionListener(this);
 
-      inventory = new JButton(new ImageIcon("inventory.png"));
+      inventory = new JButton(new ImageIcon("edit.png"));
       inventory.setBorderPainted(false);
       inventory.setContentAreaFilled(false);
       inventory.setOpaque(false);

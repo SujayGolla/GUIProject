@@ -110,4 +110,7 @@ public class Inventory {
         }
         update();
     }
+    public static ArrayList<ArrayList<ShopItem>> getInventory(){
+        return inventory;
+    }
 }

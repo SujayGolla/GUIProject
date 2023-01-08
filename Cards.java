@@ -7,7 +7,7 @@ public class Cards extends JFrame{
     static MainMenu m;
     static Homepage h;
     static Shop s;
-    static InventoryPanel iP;
+    static EditOptionPanel iP;
 
     public Cards() throws Exception{
         c = getContentPane();
@@ -17,7 +17,7 @@ public class Cards extends JFrame{
         m = new MainMenu();
         h = new Homepage();
         s = new Shop();
-        iP = new InventoryPanel();
+        iP = new EditOptionPanel();
 
         c.add("MainMenu", m);
         c.add("Homepage", h);
