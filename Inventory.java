@@ -101,12 +101,16 @@ public class Inventory {
         return cnt;
     }
     public static void addShopItem(ShopItem s, String category){
-        switch (category) {
-            case "Houses" -> houses.add(s);
-            case "Factories" -> factories.add(s);
-            case "Farms" -> farms.add(s);
-            case "Basics" -> basics.add(s);
-            case "Specials" -> specials.add(s);
+        if (category.equals("Houses")) {
+            houses.add(s);
+        } else if (category.equals("Factories")) {
+            factories.add(s);
+        } else if (category.equals("Farms")) {
+            farms.add(s);
+        } else if (category.equals("Basics")) {
+            basics.add(s);
+        } else if (category.equals("Specials")) {
+            specials.add(s);
         }
         update();
     }
