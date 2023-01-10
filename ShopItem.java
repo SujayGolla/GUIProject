@@ -1,4 +1,5 @@
 import javax.swing.*;
+import java.awt.*;
 
 public class ShopItem {
     protected final String name;
@@ -103,7 +104,17 @@ public class ShopItem {
     public static int getNumSpecials() {
         return numSpecials;
     }
+    public void myDraw(Graphics g){
+        g.drawImage(img.getImage(), x, y, 30, 30,null);
+    }
 
+    public boolean isOnTile(int mouseX, int mouseY){
+        return (x <= mouseX && mouseX <= x+30 && y <= mouseY && mouseY <= y+30);
+    }
+    public void replaceTile(ShopItem other){
+        x = other.x;
+        y = other.y;
+    }
     public static ShopItem getShopItem(String name){
         if (name.equals("Townhouse")) {
             return new HouseItem("Townhouse", 50, new ImageIcon("Townhouse.png"), null, 2, 15);
@@ -161,6 +172,10 @@ public class ShopItem {
             return new ShopItem("Townhall", 0, new ImageIcon("Townhall.png"), null, 2);
         } else if (name.equals("Fountain")) {
             return new ShopItem("Fountain", 200, new ImageIcon("Fountain.png"), null, 3);
+        } else if (name.equals("Grass")) {
+            return new ShopItem("Grass", 0, new ImageIcon("grass.png"), null, 1);
+        } else if (name.equals("Water")) {
+            return new ShopItem("Water", 0, new ImageIcon("water.png"), null, 1);
         }
         return null;
     }

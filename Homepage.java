@@ -1,10 +1,9 @@
 import javax.swing.*;
 import java.awt.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
+import java.awt.event.*;
 
 public class Homepage extends JPanel implements ActionListener {
-  private JPanel center;
+  private Map center;
   private JPanel bottom;
   private JPanel top;
   private JButton shop, inventory;
@@ -14,7 +13,7 @@ public class Homepage extends JPanel implements ActionListener {
       } catch (Exception e) {
           throw new RuntimeException(e);
       }
-      center = new JPanel();
+      center = new Map();
       bottom = new JPanel();
       top = new JPanel();
 
@@ -34,7 +33,7 @@ public class Homepage extends JPanel implements ActionListener {
 
       this.add(top, BorderLayout.NORTH);
       top.setLayout(new BorderLayout());
-      top.setBackground(new Color(0,0,0,65));
+      top.setBackground(new Color(0,0,0, 0));
       top.setOpaque(false);
       top.add(new JLabel(new ImageIcon("Untitled.png")));
 
@@ -44,7 +43,7 @@ public class Homepage extends JPanel implements ActionListener {
 
       this.add(bottom, BorderLayout.SOUTH);
       bottom.setLayout(new BorderLayout());
-      bottom.setBackground(Color.WHITE);
+      bottom.setBackground(new Color(0,0,0, 0));
       bottom.add(shop, BorderLayout.EAST);
       bottom.add(inventory, BorderLayout.WEST);
   }
@@ -79,10 +78,11 @@ public class Homepage extends JPanel implements ActionListener {
       g.drawString(""+Game.getCoins(), 885, 38);
       g.drawString(""+Game.getCash(), 885, 78);
  }
- public void actionPerformed(ActionEvent e){
+  public void actionPerformed(ActionEvent e){
       if(e.getSource() == shop)
           Cards.flipToCard("Shop");
       else if(e.getSource() == inventory)
           Cards.flipToCard("Inventory");
  }
+
 }
