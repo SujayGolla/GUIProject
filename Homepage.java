@@ -1,3 +1,9 @@
+/*
+Name: Sujay and Akaren
+Class: ICS 3U7
+Teacher: Ms.Strelkovska
+*/
+
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.*;

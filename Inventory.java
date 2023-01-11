@@ -1,3 +1,9 @@
+/*
+Name: Sujay and Akaren
+Class: ICS 3U7
+Teacher: Ms.Strelkovska
+*/
+
 import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;

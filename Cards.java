@@ -1,3 +1,9 @@
+/*
+Name: Sujay and Akaren
+Class: ICS 3U7
+Teacher: Ms.Strelkovska
+*/
+
 import javax.swing.*;
 import java.awt.*;
 
@@ -8,6 +14,7 @@ public class Cards extends JFrame{
     static Homepage h;
     static Shop s;
     static EditOptionPanel iP;
+    static Merchant me;
 
     public Cards() throws Exception{
         c = getContentPane();
@@ -18,11 +25,13 @@ public class Cards extends JFrame{
         h = new Homepage();
         s = new Shop();
         iP = new EditOptionPanel();
+        me = new Merchant();
 
         c.add("MainMenu", m);
         c.add("Homepage", h);
         c.add("Shop", s);
         c.add("Inventory", iP);
+        c.add("Merchant", me);
     }
 
     public static void flipToCard(String cardID){

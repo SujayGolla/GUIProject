@@ -1,4 +1,8 @@
-
+/*
+Name: Sujay and Akaren
+Class: ICS 3U7
+Teacher: Ms.Strelkovska
+*/
 
 import javax.swing.*;
 import java.awt.*;
@@ -49,6 +53,9 @@ public class Merchant extends JPanel  {
 
     this.add(p);
 }
+  public void paintComponent(Graphics g){
+    super.paintComponent(g);
+  }
 
 }
 

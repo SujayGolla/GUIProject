@@ -1,3 +1,9 @@
+/*
+Name: Sujay and Akaren
+Class: ICS 3U7
+Teacher: Ms.Strelkovska
+*/
+
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.*;
@@ -5,7 +11,7 @@ import java.util.ArrayList;
 
 public class EditOptionPanel extends JPanel implements ActionListener, MouseListener, MouseMotionListener {
     private JPanel top, center, centerLeft, navBar, itemsList, map, cHou, cFac, cFar, cBas, cSpe;
-    private JButton factories, houses, farming, basics, special, back;
+    private JButton factories, houses, farming, basics, special, back, merchant;
     private CardLayout layout;
     public EditOptionPanel(){
         try {
@@ -27,6 +33,9 @@ public class EditOptionPanel extends JPanel implements ActionListener, MouseList
         defaultButtonSetup(basics);
         special = new JButton(new ImageIcon("shopSpecials.png"));
         defaultButtonSetup(special);
+        merchant = new JButton(resizeImg(new ImageIcon("Merchant.png")));
+        defaultButtonSetup(merchant);
+        merchant.setPreferredSize(new Dimension(100, 100));
 
         top = new JPanel(new GridLayout(1, 5));
         top.setBackground(Color.GRAY);
@@ -49,7 +58,8 @@ public class EditOptionPanel extends JPanel implements ActionListener, MouseList
         navBar.add(basics);
         navBar.add(special);
         navBar.add(new JLabel(""));
-        navBar.add(new JLabel(""));
+        navBar.add(merchant);
+        
         layout = new CardLayout();
         itemsList = new JPanel(layout);
         cHou = new JPanel(new GridLayout(ShopItem.getNumHouses()+1, 1));
@@ -137,13 +147,15 @@ public class EditOptionPanel extends JPanel implements ActionListener, MouseList
             centerFlipToCard("Basics");
         else if(b == special)
             centerFlipToCard("Specials");
+        else if (b == merchant)
+            Cards.flipToCard("Merchant");
     }
     public void centerFlipToCard(String ID){
         layout.show(itemsList, ID);
     }
     public ImageIcon resizeImg(ImageIcon img){
         Image image = img.getImage();
-        Image newImg = image.getScaledInstance(50, 50,  java.awt.Image.SCALE_SMOOTH);
+        Image newImg = image.getScaledInstance(100, 100,  java.awt.Image.SCALE_SMOOTH);
         return new ImageIcon(newImg);
 
     }
