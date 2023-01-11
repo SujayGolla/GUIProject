@@ -1,19 +1,17 @@
 import javax.swing.*;
 import java.awt.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
+import java.awt.event.*;
 import java.util.ArrayList;
 
-public class EditOptionPanel extends JPanel implements ActionListener {
+public class EditOptionPanel extends JPanel implements ActionListener, MouseListener, MouseMotionListener {
     private JPanel top, center, centerLeft, navBar, itemsList, map, cHou, cFac, cFar, cBas, cSpe;
-    private JScrollPane cHouScroll, cFacScroll, cFarScroll, cBasScroll, cSpeScroll;
     private JButton factories, houses, farming, basics, special, back;
     private CardLayout layout;
     public EditOptionPanel(){
         try {
             new Inventory();
         } catch (Exception e) {
-            throw new RuntimeException(e);
+            System.out.println(e);
         }
         this.setLayout(new BorderLayout());
 
@@ -56,26 +54,25 @@ public class EditOptionPanel extends JPanel implements ActionListener {
         itemsList = new JPanel(layout);
         cHou = new JPanel(new GridLayout(ShopItem.getNumHouses()+1, 1));
         cHou.setBackground(Color.red);
-        itemsList.add(cHou);
+        itemsList.add("Houses", cHou);
         cFac = new JPanel(new GridLayout(ShopItem.getNumFactories()+1, 1));
         cFac.setBackground(Color.ORANGE);
-        itemsList.add(cFac);
+        itemsList.add("Factories", cFac);
         cFar = new JPanel(new GridLayout(ShopItem.getNumFarms()+1, 1));
         cFar.setBackground(Color.YELLOW);
-        itemsList.add(cFar);
+        itemsList.add("Farming", cFar);
         cBas = new JPanel(new GridLayout(ShopItem.getNumBasics()+1, 1));
         cBas.setBackground(Color.GREEN);
-        itemsList.add(cBas);
+        itemsList.add("Basics", cBas);
         cSpe = new JPanel(new GridLayout(ShopItem.getNumSpecials(), 1));
         cSpe.setBackground(Color.BLUE);
-        itemsList.add(cSpe);
+        itemsList.add("Specials", cSpe);
         makeItemsList();
         centerLeft.add(navBar, BorderLayout.WEST);
         centerLeft.add(itemsList, BorderLayout.EAST);
         center.add(centerLeft, BorderLayout.WEST);
 
-        map = new JPanel(null);
-        map.setBackground(Color.BLACK);
+        map = new Edit();
         center.add(map, BorderLayout.CENTER);
 
         this.add(top, BorderLayout.NORTH);
@@ -97,9 +94,17 @@ public class EditOptionPanel extends JPanel implements ActionListener {
                     background.setBounds(0,y,backGSize.width, backGSize.height);
                     panel.add(background);
 
-                    JLabel l = new JLabel(Inventory.specificItemCounter(inventory.get(i), s.getName()) + "", resizeImg(s.getImg()), JLabel.CENTER);
+                    JButton b = new JButton(resizeImg(s.getImg()));
+                    Dimension bSize = b.getPreferredSize();
+                    b.setBounds(50-(bSize.width/2),y+55-(bSize.height/2),bSize.width, bSize.height);
+                    defaultButtonSetup(b);
+                    b.addMouseListener(this);
+                    b.addMouseMotionListener(this);
+                    panel.add(b);
+
+                    JLabel l = new JLabel(Inventory.specificItemCounter(inventory.get(i), s.getName()) + "");
                     Dimension lSize = l.getPreferredSize();
-                    l.setBounds(50-(lSize.width/2),y+35-(lSize.height/2),lSize.width, lSize.height);
+                    l.setBounds(50-(lSize.width/2),y+15-(lSize.height/2),lSize.width, lSize.height);
                     l.setFont(new Font("Times New Roman", Font.BOLD, 12));
                     panel.add(l);
 
@@ -137,9 +142,44 @@ public class EditOptionPanel extends JPanel implements ActionListener {
         layout.show(itemsList, ID);
     }
     public ImageIcon resizeImg(ImageIcon img){
-        Image image = img.getImage(); // transform it
+        Image image = img.getImage();
         Image newImg = image.getScaledInstance(50, 50,  java.awt.Image.SCALE_SMOOTH);
         return new ImageIcon(newImg);
+
+    }
+
+    @Override
+    public void mouseClicked(MouseEvent e) {
+
+    }
+
+    @Override
+    public void mousePressed(MouseEvent e) {
+
+    }
+
+    @Override
+    public void mouseReleased(MouseEvent e) {
+
+    }
+
+    @Override
+    public void mouseEntered(MouseEvent e) {
+
+    }
+
+    @Override
+    public void mouseExited(MouseEvent e) {
+
+    }
+
+    @Override
+    public void mouseDragged(MouseEvent e) {
+
+    }
+
+    @Override
+    public void mouseMoved(MouseEvent e) {
 
     }
 }

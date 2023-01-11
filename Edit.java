@@ -8,16 +8,15 @@ import java.io.FileNotFoundException;
 import java.util.ArrayList;
 import java.util.Scanner;
 
-public class Map extends JPanel {
+public class Edit extends JPanel implements MouseMotionListener, MouseListener {
     private char[][] map;
     private ArrayList<ShopItem> tiles;
     private Scanner sc;
     private ShopItem currentItem = null;
-    public Map(){
+    public Edit(){
         try {
             sc = new Scanner(new File("Map.txt"));
-            new Inventory();
-        } catch (Exception e) {
+        } catch (FileNotFoundException e) {
             System.out.println(e);
         }
         map = new char[15][15];
@@ -46,6 +45,8 @@ public class Map extends JPanel {
                 }
             }
         }
+        addMouseListener(this);
+        addMouseMotionListener(this);
     }
     public void paintComponent(Graphics g){
         super.paintComponent(g);
@@ -54,5 +55,53 @@ public class Map extends JPanel {
         }
         if(currentItem != null)
             currentItem.myDraw(g);
+    }
+    public void mouseClicked(MouseEvent e) {
+
+    }
+
+    @Override
+    public void mousePressed(MouseEvent e) {
+        for(int i = 0; i < tiles.size(); i++){
+            if(tiles.get(i).isOnTile(e.getX(), e.getY())) {
+                currentItem = tiles.get(i);
+            }
+        }
+    }
+
+    @Override
+    public void mouseReleased(MouseEvent e) {
+        for(int i = 0; i < tiles.size(); i++){
+            if(tiles.get(i).isOnTile(e.getX(), e.getY()) && currentItem != null) {
+                currentItem.replaceTile(tiles.get(i));
+                tiles.set(i, currentItem);
+            }
+        }
+        repaint();
+        currentItem = null;
+    }
+
+    @Override
+    public void mouseEntered(MouseEvent e) {
+
+    }
+
+    @Override
+    public void mouseExited(MouseEvent e) {
+
+    }
+
+    @Override
+    public void mouseDragged(MouseEvent e) {
+        if(currentItem != null && !currentItem.isSpecialTile()){
+            currentItem.setX(e.getX());
+            currentItem.setY(e.getY());
+        }
+        repaint();
+    }
+
+    @Override
+    public void mouseMoved(MouseEvent e) {
+
     }
 }
