@@ -78,7 +78,7 @@ public class Edit extends JPanel implements MouseMotionListener, MouseListener {
     @Override
     public void mouseReleased(MouseEvent e) {
         for(int i = 0; i < tiles.size(); i++){
-            if(tiles.get(i).isOnTile(e.getX(), e.getY()) && currentItem != null) {
+            if(tiles.get(i).isOnTile(e.getX(), e.getY()) && currentItem != null && !currentItem.isSpecialTile()) {
                 currentItem.replaceTile(tiles.get(i));
                 tiles.set(i, currentItem);
             }

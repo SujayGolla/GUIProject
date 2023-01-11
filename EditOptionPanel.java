@@ -33,13 +33,13 @@ public class EditOptionPanel extends JPanel implements ActionListener, MouseList
         defaultButtonSetup(basics);
         special = new JButton(new ImageIcon("shopSpecials.png"));
         defaultButtonSetup(special);
-        merchant = new JButton(resizeImg(new ImageIcon("Merchant.png")));
+        merchant = new JButton(resizeImg(new ImageIcon("Merchant.png"), 100,100));
         defaultButtonSetup(merchant);
-        merchant.setPreferredSize(new Dimension(100, 100));
+        merchant.setSize(new Dimension(100,100));
 
         top = new JPanel(new GridLayout(1, 5));
         top.setBackground(Color.GRAY);
-        JLabel title = new JLabel("    Inventory");
+        JLabel title = new JLabel("    Edit");
         title.setFont(new Font("Times New Roman", Font.BOLD, 24));
         top.add(back);
         top.add(new JLabel(""));
@@ -63,19 +63,29 @@ public class EditOptionPanel extends JPanel implements ActionListener, MouseList
         layout = new CardLayout();
         itemsList = new JPanel(layout);
         cHou = new JPanel(new GridLayout(ShopItem.getNumHouses()+1, 1));
-        cHou.setBackground(Color.red);
+        JLabel l = new JLabel("List of Houses", JLabel.CENTER);
+        l.setFont(new Font("Times New Roman", Font.BOLD, 18));
+        cHou.add(l);
         itemsList.add("Houses", cHou);
         cFac = new JPanel(new GridLayout(ShopItem.getNumFactories()+1, 1));
-        cFac.setBackground(Color.ORANGE);
+        l = new JLabel("List of Factories", JLabel.CENTER);
+        l.setFont(new Font("Times New Roman", Font.BOLD, 18));
+        cFac.add(l);
         itemsList.add("Factories", cFac);
         cFar = new JPanel(new GridLayout(ShopItem.getNumFarms()+1, 1));
-        cFar.setBackground(Color.YELLOW);
+        l = new JLabel("List of Farms", JLabel.CENTER);
+        l.setFont(new Font("Times New Roman", Font.BOLD, 18));
+        cFar.add(l);
         itemsList.add("Farming", cFar);
         cBas = new JPanel(new GridLayout(ShopItem.getNumBasics()+1, 1));
-        cBas.setBackground(Color.GREEN);
+        l = new JLabel("List of Basics", JLabel.CENTER);
+        l.setFont(new Font("Times New Roman", Font.BOLD, 18));
+        cBas.add(l);
         itemsList.add("Basics", cBas);
-        cSpe = new JPanel(new GridLayout(ShopItem.getNumSpecials(), 1));
-        cSpe.setBackground(Color.BLUE);
+        cSpe = new JPanel(new GridLayout(ShopItem.getNumSpecials()+1, 1));
+        l = new JLabel("List of Specials", JLabel.CENTER);
+        l.setFont(new Font("Times New Roman", Font.BOLD, 18));
+        cSpe.add(l);
         itemsList.add("Specials", cSpe);
         makeItemsList();
         centerLeft.add(navBar, BorderLayout.WEST);
@@ -99,14 +109,9 @@ public class EditOptionPanel extends JPanel implements ActionListener, MouseList
                 if(!onPanel.contains(s.getName())){
                     JPanel panel = new JPanel(null);
 
-                    JLabel background = new JLabel(new ImageIcon("inventoryBox.png"));
-                    Dimension backGSize = background.getPreferredSize();
-                    background.setBounds(0,y,backGSize.width, backGSize.height);
-                    panel.add(background);
-
-                    JButton b = new JButton(resizeImg(s.getImg()));
+                    JButton b = new JButton(resizeImg(s.getImg(), 35,35));
                     Dimension bSize = b.getPreferredSize();
-                    b.setBounds(50-(bSize.width/2),y+55-(bSize.height/2),bSize.width, bSize.height);
+                    b.setBounds(13+50-(bSize.width/2),y+45-(bSize.height/2),bSize.width, bSize.height);
                     defaultButtonSetup(b);
                     b.addMouseListener(this);
                     b.addMouseMotionListener(this);
@@ -114,9 +119,14 @@ public class EditOptionPanel extends JPanel implements ActionListener, MouseList
 
                     JLabel l = new JLabel(Inventory.specificItemCounter(inventory.get(i), s.getName()) + "");
                     Dimension lSize = l.getPreferredSize();
-                    l.setBounds(50-(lSize.width/2),y+15-(lSize.height/2),lSize.width, lSize.height);
+                    l.setBounds(13+50-(lSize.width/2),y+15-(lSize.height/2),lSize.width, lSize.height);
                     l.setFont(new Font("Times New Roman", Font.BOLD, 12));
                     panel.add(l);
+
+                    JLabel background = new JLabel(new ImageIcon("inventoryBox.png"));
+                    Dimension backGSize = background.getPreferredSize();
+                    background.setBounds(13,y,backGSize.width, backGSize.height);
+                    panel.add(background);
 
                     p.add(panel);
                     onPanel += s.getName();
@@ -153,11 +163,10 @@ public class EditOptionPanel extends JPanel implements ActionListener, MouseList
     public void centerFlipToCard(String ID){
         layout.show(itemsList, ID);
     }
-    public ImageIcon resizeImg(ImageIcon img){
+    public ImageIcon resizeImg(ImageIcon img, int w, int h){
         Image image = img.getImage();
-        Image newImg = image.getScaledInstance(100, 100,  java.awt.Image.SCALE_SMOOTH);
+        Image newImg = image.getScaledInstance(w, h,  java.awt.Image.SCALE_SMOOTH);
         return new ImageIcon(newImg);
-
     }
 
     @Override

@@ -52,7 +52,8 @@ public class Inventory {
                 String name = line.substring(line.indexOf("-") + 1);
                 addItemsInitialization(a, numItems, name);
             }
-            sc.nextLine();
+            if(sc.hasNextLine())
+                sc.nextLine();
         }
     }
     public static void addItemsInitialization(ArrayList<ShopItem> a, int n, String name){
