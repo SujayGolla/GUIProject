@@ -66,28 +66,39 @@ public class EditOptionPanel extends JPanel implements ActionListener, MouseList
         JLabel l = new JLabel("List of Houses", JLabel.CENTER);
         l.setFont(new Font("Times New Roman", Font.BOLD, 18));
         cHou.add(l);
-        itemsList.add("Houses", cHou);
         cFac = new JPanel(new GridLayout(ShopItem.getNumFactories()+1, 1));
         l = new JLabel("List of Factories", JLabel.CENTER);
         l.setFont(new Font("Times New Roman", Font.BOLD, 18));
         cFac.add(l);
-        itemsList.add("Factories", cFac);
         cFar = new JPanel(new GridLayout(ShopItem.getNumFarms()+1, 1));
         l = new JLabel("List of Farms", JLabel.CENTER);
         l.setFont(new Font("Times New Roman", Font.BOLD, 18));
         cFar.add(l);
-        itemsList.add("Farming", cFar);
         cBas = new JPanel(new GridLayout(ShopItem.getNumBasics()+1, 1));
         l = new JLabel("List of Basics", JLabel.CENTER);
         l.setFont(new Font("Times New Roman", Font.BOLD, 18));
         cBas.add(l);
-        itemsList.add("Basics", cBas);
         cSpe = new JPanel(new GridLayout(ShopItem.getNumSpecials()+1, 1));
         l = new JLabel("List of Specials", JLabel.CENTER);
         l.setFont(new Font("Times New Roman", Font.BOLD, 18));
         cSpe.add(l);
-        itemsList.add("Specials", cSpe);
         makeItemsList();
+
+        JScrollPane p = new JScrollPane(cHou);
+        itemsList.add("Houses", p);
+
+        p = new JScrollPane(cFac);
+        itemsList.add("Factories", p);
+
+        p = new JScrollPane(cFar);
+        itemsList.add("Farming", p);
+
+        p = new JScrollPane(cBas);
+        itemsList.add("Basics", p);
+
+        p = new JScrollPane(cSpe);
+        itemsList.add("Specials", p);
+
         centerLeft.add(navBar, BorderLayout.WEST);
         centerLeft.add(itemsList, BorderLayout.EAST);
         center.add(centerLeft, BorderLayout.WEST);
@@ -104,14 +115,13 @@ public class EditOptionPanel extends JPanel implements ActionListener, MouseList
         for(int i = 0; i < panels.length; i++){
             JPanel p = panels[i];
             String onPanel = "";
-            int y = 0;
             for(ShopItem s : inventory.get(i)){
                 if(!onPanel.contains(s.getName())){
                     JPanel panel = new JPanel(null);
 
                     JButton b = new JButton(resizeImg(s.getImg(), 35,35));
                     Dimension bSize = b.getPreferredSize();
-                    b.setBounds(13+50-(bSize.width/2),y+45-(bSize.height/2),bSize.width, bSize.height);
+                    b.setBounds(13+50-(bSize.width/2),45-(bSize.height/2),bSize.width, bSize.height);
                     defaultButtonSetup(b);
                     b.addMouseListener(this);
                     b.addMouseMotionListener(this);
@@ -119,18 +129,17 @@ public class EditOptionPanel extends JPanel implements ActionListener, MouseList
 
                     JLabel l = new JLabel(Inventory.specificItemCounter(inventory.get(i), s.getName()) + "");
                     Dimension lSize = l.getPreferredSize();
-                    l.setBounds(13+50-(lSize.width/2),y+15-(lSize.height/2),lSize.width, lSize.height);
+                    l.setBounds(13+50-(lSize.width/2),15-(lSize.height/2),lSize.width, lSize.height);
                     l.setFont(new Font("Times New Roman", Font.BOLD, 12));
                     panel.add(l);
 
                     JLabel background = new JLabel(new ImageIcon("inventoryBox.png"));
                     Dimension backGSize = background.getPreferredSize();
-                    background.setBounds(13,y,backGSize.width, backGSize.height);
+                    background.setBounds(13,0,backGSize.width, backGSize.height);
                     panel.add(background);
 
                     p.add(panel);
                     onPanel += s.getName();
-                    y += 70;
                 }
             }
         }

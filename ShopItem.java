@@ -212,7 +212,7 @@ public class ShopItem {
         } else if (name.equals("Water")) {
             return new SpecialTiles("Water", new ImageIcon("water.png"));
         } else if (name.equals("Mountains")){
-            return new SpecialTiles("Mountains", new ImageIcon("mountain.jpg"), new ImageIcon[]{new ImageIcon("mountain1.jpg")});
+            return new SpecialTiles("Mountains", new ImageIcon("mountain.jpg"), new ImageIcon[]{new ImageIcon("mountain.jpg"), new ImageIcon("mountain1.jpg")});
         }
         return null;
     }
