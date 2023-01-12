@@ -11,8 +11,19 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.util.ArrayList;
 import java.util.Scanner;
+import java.awt.event.MouseWheelEvent;
+import java.awt.event.MouseWheelListener;
+import java.awt.geom.AffineTransform;
 
-public class Homepage extends JPanel implements ActionListener {
+
+
+public class Homepage extends JPanel implements ActionListener, MouseWheelListener{
+  
+      private double zoomFactor = 1;
+      private double prevZoomFactor = 1;
+      private boolean zoomer;
+  
+    
     private char[][] map;
     private ArrayList<ShopItem> tiles;
     private Scanner sc;
@@ -75,6 +86,17 @@ public class Homepage extends JPanel implements ActionListener {
     }
     public void paintComponent(Graphics g){
         super.paintComponent(g);
+
+        addMouseWheelListener(this);
+        Graphics2D g3 = (Graphics2D) g;
+        if (zoomer) {
+          AffineTransform at = new AffineTransform();
+          at.scale(zoomFactor, zoomFactor);
+          prevZoomFactor = zoomFactor;
+          g3.transform(at);
+          zoomer = false;
+    }
+          
         for(int i = 0; i < tiles.size(); i++){
             tiles.get(i).myDraw(g);
         }
@@ -111,4 +133,20 @@ public class Homepage extends JPanel implements ActionListener {
         else if(e.getSource() == inventoryBtn)
             Cards.flipToCard("Inventory");
     }
+
+  @Override
+  public void mouseWheelMoved(MouseWheelEvent e) {
+    zoomer = true;
+    //Zoom in
+    if (e.getWheelRotation() < 0) {
+        zoomFactor *= 1.05;
+        repaint();
+    }
+    //Zoom out
+    if (e.getWheelRotation() > 0) {
+        zoomFactor /= 1.05;
+        repaint();
+    }
+}
+
 }
