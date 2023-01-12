@@ -7,10 +7,19 @@ Teacher: Ms.Strelkovska
 import javax.swing.*;
 
 public class SpecialTiles extends ShopItem{
+    public SpecialTiles(String name, ImageIcon img, ImageIcon[] sprites) {
+        super(name, img, sprites);
+    }
     public SpecialTiles(String name, ImageIcon img) {
-        super(name, img);
+        super(name, img, null);
     }
     public boolean isSpecialTile(){
         return true;
+    }
+    public ImageIcon getRandomImg(){
+        if(animations == null)
+            return super.getImg();
+        else
+            return (animations[(int)(Math.random() * animations.length)]);
     }
 }

@@ -26,21 +26,17 @@ public class Map extends JPanel {
         } catch (Exception e) {
             System.out.println(e);
         }
-        map = new char[15][15];
+        map = new char[20][40];
         tiles = new ArrayList<ShopItem>();
         for(int i = 0; i < map.length; i++){
             for(int j= 0; j < map[i].length; j++){
                 map[i][j] = sc.next().charAt(0);
                 if(map[i][j] == 'g') {
-                    ShopItem s = ShopItem.getShopItem("Grass");
-                    s.setX(j*30);
-                    s.setY(i*30);
-                    tiles.add(s);
+                    addToTiles("Grass", i, j);
                 } else if(map[i][j] == 'w'){
-                    ShopItem s = ShopItem.getShopItem("Water");
-                    s.setX(j*30);
-                    s.setY(i*30);
-                    tiles.add(s);
+                    addToTiles("Water", i, j);
+                } else if(map[i][j] == 'm'){
+                    addToTiles("Mountains", i, j);
                 }
             }
         }
@@ -52,6 +48,12 @@ public class Map extends JPanel {
                 }
             }
         }
+    }
+    public void addToTiles(String name, int i, int j){
+        ShopItem s = ShopItem.getShopItem(name);
+        s.setX(j*30);
+        s.setY(i*30);
+        tiles.add(s);
     }
     public void paintComponent(Graphics g){
         super.paintComponent(g);

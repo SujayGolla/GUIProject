@@ -19,8 +19,8 @@ Farms
 ----------
 Basics
 5-Roads
-0-Gravel
-0-Tiles
+5-Gravel
+5-Tiles
 ----------
 Specials
 0-Barn

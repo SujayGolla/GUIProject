@@ -35,7 +35,7 @@ public class ShopItem {
         this.unlockLVL = unlockLVL;
     }
 
-    public ShopItem(String name, ImageIcon img){
+    public ShopItem(String name, ImageIcon img, ImageIcon[] sprites){
         try {
             new Game();
         } catch (Exception e) {
@@ -44,7 +44,7 @@ public class ShopItem {
         this.name = name;
         this.price = 0;
         this.img = img;
-        this.animations = null;
+        this.animations = sprites;
         this.unlockLVL = 0;
     }
 
@@ -124,6 +124,10 @@ public class ShopItem {
         return numFarms;
     }
 
+    public ImageIcon getRandomImg(){
+        return img;
+    }
+
     public static int getNumCrops() {
         return numCrops;
     }
@@ -136,7 +140,7 @@ public class ShopItem {
         return numSpecials;
     }
     public void myDraw(Graphics g){
-        g.drawImage(img.getImage(), x, y, 30, 30,null);
+        g.drawImage(getRandomImg().getImage(), x, y, 30, 30,null);
     }
 
     public boolean isOnTile(int mouseX, int mouseY){
@@ -207,6 +211,8 @@ public class ShopItem {
             return new SpecialTiles("Grass", new ImageIcon("grass.png"));
         } else if (name.equals("Water")) {
             return new SpecialTiles("Water", new ImageIcon("water.png"));
+        } else if (name.equals("Mountains")){
+            return new SpecialTiles("Mountains", new ImageIcon("mountain.jpg"), new ImageIcon[]{new ImageIcon("mountain1.jpg")});
         }
         return null;
     }
