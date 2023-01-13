@@ -19,8 +19,9 @@ import java.awt.geom.AffineTransform;
 public class Map extends JPanel implements MouseWheelListener{
   
       private double zoomFactor = 1;
-      private double prevZoomFactor = 1;
       private boolean zoomer;
+      private int zoomPointX;
+      private int zoomPointY;
     
     private char[][] map;
     private ArrayList<ShopItem> tiles;
@@ -64,16 +65,16 @@ public class Map extends JPanel implements MouseWheelListener{
         tiles.add(s);
     }
     public void paintComponent(Graphics g){
-        super.paintComponent(g);
-
+      Graphics2D g2 = (Graphics2D) g;
+      super.paintComponent(g);
         addMouseWheelListener(this);
-        Graphics2D g3 = (Graphics2D) g;
         if (zoomer) {
-          AffineTransform at = new AffineTransform();
+          AffineTransform at = g2.getTransform();
+          at.translate(zoomPointX, zoomPointY);
           at.scale(zoomFactor, zoomFactor);
-          prevZoomFactor = zoomFactor;
-          g3.transform(at);
-          zoomer = false;
+          at.translate(-zoomPointX, -zoomPointY);
+          g2.setTransform(at);
+          
         }
         for(int i = 0; i < tiles.size(); i++){
             tiles.get(i).myDraw(g);
@@ -84,17 +85,19 @@ public class Map extends JPanel implements MouseWheelListener{
 
   @Override
   public void mouseWheelMoved(MouseWheelEvent e) {
+    zoomPointX = e.getX();
+    zoomPointY = e.getY();
     zoomer = true;
     //Zoom in
     if (e.getWheelRotation() < 0) {
-        zoomFactor *= 1.05;
-        repaint();
+      if (zoomFactor < 1.45)
+        zoomFactor += 0.05;
     }
-    //Zoom out
-    if (e.getWheelRotation() > 0) {
-        zoomFactor /= 1.05;
-        repaint();
+    else {
+      if (zoomFactor > 0.85)
+        zoomFactor -= 0.05;
     }
-}
+    repaint(); 
+  }
 
 }
