@@ -123,9 +123,7 @@ public class EditOptionPanel extends JPanel implements ActionListener, MouseList
                     Dimension bSize = b.getPreferredSize();
                     b.setBounds(13+50-(bSize.width/2),45-(bSize.height/2),bSize.width, bSize.height);
                     defaultButtonSetup(b);
-                    b.addMouseListener(this);
-                    b.addMouseMotionListener(this);
-                    panel.add(b);
+                    panel.add(s.getName(), b);
 
                     JLabel l = new JLabel(Inventory.specificItemCounter(inventory.get(i), s.getName()) + "");
                     Dimension lSize = l.getPreferredSize();

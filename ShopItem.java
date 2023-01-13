@@ -10,7 +10,7 @@ import java.awt.*;
 public class ShopItem {
     protected final String name;
     protected final int price;
-    protected final ImageIcon img;
+    protected ImageIcon img;
     protected final ImageIcon[] animations;
     protected final int unlockLVL;
     protected int x = -1;

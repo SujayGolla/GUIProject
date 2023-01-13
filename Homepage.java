@@ -1,107 +1,43 @@
-/*
-Name: Sujay and Akaren
-Class: ICS 3U7
-Teacher: Ms.Strelkovska
-*/
-
 import javax.swing.*;
 import java.awt.*;
-import java.awt.event.*;
-import java.io.File;
-import java.io.FileNotFoundException;
-import java.util.ArrayList;
-import java.util.Scanner;
-import java.awt.event.MouseWheelEvent;
-import java.awt.event.MouseWheelListener;
-import java.awt.geom.AffineTransform;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 
-
-
-public class Homepage extends JPanel implements ActionListener, MouseWheelListener{
-  
-      private double zoomFactor = 1;
-      private double prevZoomFactor = 1;
-      private boolean zoomer;
-  
-    
-    private char[][] map;
-    private ArrayList<ShopItem> tiles;
-    private Scanner sc;
-    private ShopItem currentItem = null;
+public class Homepage extends JPanel implements ActionListener {
     private JButton shop, inventoryBtn;
+    private JPanel top, center, bottom;
     public Homepage(){
-        try {
-            sc = new Scanner(new File("Map.txt"));
-            new Inventory();
-            new Game();
-        } catch (Exception e) {
-            System.out.println(e);
-        }
-        map = new char[20][40];
-        tiles = new ArrayList<ShopItem>();
-        for(int i = 0; i < map.length; i++){
-            for(int j= 0; j < map[i].length; j++){
-                map[i][j] = sc.next().charAt(0);
-                if(map[i][j] == 'g') {
-                    addToTiles("Grass", i, j);
-                } else if(map[i][j] == 'w'){
-                    addToTiles("Water", i, j);
-                } else if(map[i][j] == 'm'){
-                    addToTiles("Mountains", i, j);
-                }
-            }
-        }
-        ArrayList<ArrayList<ShopItem>> inventory = Inventory.getInventory();
-        for(ArrayList<ShopItem> a : inventory){
-            for(ShopItem s : a){
-                if(s.getX() != -1 && s.getY() != -1){
-                    tiles.add(s);
-                }
-            }
-        }
+        this.setLayout(new BorderLayout());
 
+        top = new JPanel(null);
+        top.setBackground(new Color(0,0,0, 100));
+        JLabel l = new JLabel(new ImageIcon("Untitled1.png"));
+        l.setBounds(0,0,1,100);
+        top.add(l);
+        this.add(top, BorderLayout.NORTH);
+
+        center = new Map();
+        this.add(center, BorderLayout.CENTER);
+
+        bottom = new JPanel(new BorderLayout());
+        top.setBackground(new Color(0,0,0, 10));
         shop = new JButton(new ImageIcon("shop.png"));
         shop.setBorderPainted(false);
         shop.setContentAreaFilled(false);
         shop.setOpaque(false);
         shop.addActionListener(this);
-        Dimension size = shop.getPreferredSize();
-        shop.setBounds(15,  475, size.width, size.height);
-        this.add(shop);
-
+        bottom.add(shop, BorderLayout.EAST);
         inventoryBtn = new JButton(new ImageIcon("edit.png"));
         inventoryBtn.setBorderPainted(false);
         inventoryBtn.setContentAreaFilled(false);
         inventoryBtn.setOpaque(false);
         inventoryBtn.addActionListener(this);
-        size = inventoryBtn.getPreferredSize();
-        inventoryBtn.setBounds(985, 475, size.width, size.height);
-        this.add(inventoryBtn);
+        bottom.add(inventoryBtn, BorderLayout.WEST);
+        this.add(bottom, BorderLayout.SOUTH);
     }
-    public void addToTiles(String name, int i, int j){
-        ShopItem s = ShopItem.getShopItem(name);
-        s.setX(j*30);
-        s.setY(i*30);
-        tiles.add(s);
-    }
+
     public void paintComponent(Graphics g){
         super.paintComponent(g);
-
-        addMouseWheelListener(this);
-        Graphics2D g3 = (Graphics2D) g;
-        if (zoomer) {
-          AffineTransform at = new AffineTransform();
-          at.scale(zoomFactor, zoomFactor);
-          prevZoomFactor = zoomFactor;
-          g3.transform(at);
-          zoomer = false;
-    }
-          
-        for(int i = 0; i < tiles.size(); i++){
-            tiles.get(i).myDraw(g);
-        }
-        if(currentItem != null)
-            currentItem.myDraw(g);
         Graphics2D g2 = (Graphics2D) g;
         g2.setColor(new Color(0,0,0,100));
         g2.fillRoundRect(50,20,100,25,20,20);
@@ -125,7 +61,6 @@ public class Homepage extends JPanel implements ActionListener, MouseWheelListen
         g.drawString(""+Game.getCoins(), 885, 38);
         g.drawString(""+Game.getCash(), 885, 78);
     }
-
     @Override
     public void actionPerformed(ActionEvent e) {
         if(e.getSource() == shop)
@@ -133,20 +68,4 @@ public class Homepage extends JPanel implements ActionListener, MouseWheelListen
         else if(e.getSource() == inventoryBtn)
             Cards.flipToCard("Inventory");
     }
-
-  @Override
-  public void mouseWheelMoved(MouseWheelEvent e) {
-    zoomer = true;
-    //Zoom in
-    if (e.getWheelRotation() < 0) {
-        zoomFactor *= 1.05;
-        repaint();
-    }
-    //Zoom out
-    if (e.getWheelRotation() > 0) {
-        zoomFactor /= 1.05;
-        repaint();
-    }
-}
-
 }
