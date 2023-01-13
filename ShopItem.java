@@ -17,10 +17,11 @@ public class ShopItem {
     protected int y = -1;
     protected static final int numFactories = 6;
     protected static final int numHouses = 4;
-    protected static final int numFarms = 3;
+    protected static final int numFarms = 4;
     protected static final int numCrops = 7;
     protected static final int numBasics = 3;
     protected static final int numSpecials = 3;
+    protected final int size = 30;
 
     public ShopItem(String name, int price, ImageIcon img, ImageIcon[] animations, int unlockLVL){
         try {
@@ -140,9 +141,11 @@ public class ShopItem {
         return numSpecials;
     }
     public void myDraw(Graphics g){
-        g.drawImage(getRandomImg().getImage(), x, y, 30, 30,null);
+        g.drawImage(getRandomImg().getImage(), x, y, size, size,null);
     }
-
+    public boolean isPlaced(){
+        return x != -1 && y != -1;
+    }
     public boolean isOnTile(int mouseX, int mouseY){
         return (x <= mouseX && mouseX <= x+30 && y <= mouseY && mouseY <= y+30);
     }

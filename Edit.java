@@ -42,7 +42,7 @@ public class Edit extends JPanel implements MouseMotionListener, MouseListener {
         ArrayList<ArrayList<ShopItem>> inventory = Inventory.getInventory();
         for(ArrayList<ShopItem> a : inventory){
             for(ShopItem s : a){
-                if(s.getX() != -1 && s.getY() != -1){
+                if(s.isPlaced()){
                     tiles.add(s);
                 }
             }

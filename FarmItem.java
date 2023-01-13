@@ -5,9 +5,11 @@ Teacher: Ms.Strelkovska
 */
 
 import javax.swing.*;
+import java.awt.*;
 
 public class FarmItem extends ShopItem{
     private int reqPpl;
+    private final int size = 60;
     private static final String farms = "Field, Cowshed, Chicken Coop, Sheep Farm";
     public FarmItem(String name, int price, ImageIcon img, ImageIcon[] animations, int unlockLVL, int reqPpl) {
         super(name, price, img, animations, unlockLVL);
@@ -46,5 +48,8 @@ public class FarmItem extends ShopItem{
     }
     public static boolean isFarm(String name){
         return farms.contains(name);
+    }
+    public void myDraw(Graphics g){
+        g.drawImage(getRandomImg().getImage(), x, y, size, size,null);
     }
 }

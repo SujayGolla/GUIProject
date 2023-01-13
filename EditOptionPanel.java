@@ -116,7 +116,7 @@ public class EditOptionPanel extends JPanel implements ActionListener, MouseList
             JPanel p = panels[i];
             String onPanel = "";
             for(ShopItem s : inventory.get(i)){
-                if(!onPanel.contains(s.getName())){
+                if(!onPanel.contains(s.getName()) && !s.isPlaced()){
                     JPanel panel = new JPanel(null);
 
                     JButton b = new JButton(resizeImg(s.getImg(), 35,35));

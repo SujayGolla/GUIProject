@@ -9,9 +9,9 @@ public class Homepage extends JPanel implements ActionListener {
     public Homepage(){
         this.setLayout(new BorderLayout());
 
-        top = new JPanel(null);
+        top = new JPanel();
         top.setBackground(new Color(0,0,0, 100));
-        JLabel l = new JLabel(new ImageIcon("Untitled1.png"));
+        JLabel l = new JLabel(new ImageIcon("Untitled.png"));
         l.setBounds(0,0,1,100);
         top.add(l);
         this.add(top, BorderLayout.NORTH);

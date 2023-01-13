@@ -5,8 +5,10 @@ Teacher: Ms.Strelkovska
 */
 
 import java.io.File;
+import java.io.FileNotFoundException;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.sql.SQLOutput;
 import java.util.ArrayList;
 import java.util.Scanner;
 
@@ -18,7 +20,7 @@ public class Inventory {
     private static ArrayList<ShopItem> specials;
     private static final ArrayList<ArrayList<ShopItem>> inventory = new ArrayList<ArrayList<ShopItem>>();
 
-    public Inventory() throws Exception {
+    public Inventory() {
         houses = new ArrayList<ShopItem>();
         inventory.add(houses);
         factories = new ArrayList<ShopItem>();
@@ -30,8 +32,13 @@ public class Inventory {
         specials = new ArrayList<ShopItem>();
         inventory.add(specials);
 
-        Scanner sc = new Scanner(new File("Inventory.txt"));
-        
+        Scanner sc = null;
+        try {
+            sc = new Scanner(new File("Inventory.txt"));
+        } catch (FileNotFoundException e) {
+            System.out.println(e);
+        }
+
         for(ArrayList<ShopItem> a : inventory) {
             int tmp = 0;
             if(a == houses)
@@ -47,13 +54,19 @@ public class Inventory {
 
             sc.nextLine();
             for(int i = 0; i < tmp; i++) {
-                String line = sc.nextLine();
-                int numItems = Integer.parseInt(line.substring(0, line.indexOf("-")));
-                String name = line.substring(line.indexOf("-") + 1);
-                addItemsInitialization(a, numItems, name);
+                if(sc.hasNextLine()) {
+                    String line = sc.nextLine();
+                    if (line.endsWith(".")) {
+                        System.out.println(line);
+                        int numItems = Integer.parseInt(line.substring(0, line.indexOf("-")));
+                        System.out.println(numItems);
+                        String name = line.substring(line.indexOf("-") + 1, line.indexOf("."));
+                        System.out.println(name);
+                        addItemsInitialization(a, numItems, name);
+                    }
+                }
             }
-            if(sc.hasNextLine())
-                sc.nextLine();
+            sc.nextLine();
         }
     }
     public static void addItemsInitialization(ArrayList<ShopItem> a, int n, String name){
@@ -80,6 +93,7 @@ public class Inventory {
             gameData.write(specificItemCounter(factories, "Fast Food Restaurant") + "-" + "Fast Food Restaurant\n");
             gameData.write("----------\n");
             gameData.write("Farms" + "\n");
+            gameData.write(specificItemCounter(farms, "Field") + "-" + "Field\n");
             gameData.write(specificItemCounter(farms, "Cowshed") + "-" + "Cowshed\n");
             gameData.write(specificItemCounter(farms, "Chicken Coop") + "-" + "Chicken Coop\n");
             gameData.write(specificItemCounter(farms, "Sheep Farm") + "-" + "Sheep Farm\n");
@@ -107,7 +121,7 @@ public class Inventory {
         }
         return cnt;
     }
-    public static void addShopItem(ShopItem s, String category){
+    public static void addShopItem(ShopItem s, String category) {
         if (category.equals("Houses")) {
             houses.add(s);
         } else if (category.equals("Factories")) {
