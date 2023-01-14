@@ -18,7 +18,7 @@ public class Inventory {
     private static ArrayList<ShopItem> farms;
     private static ArrayList<ShopItem> basics;
     private static ArrayList<ShopItem> specials;
-    private static final ArrayList<ArrayList<ShopItem>> inventory = new ArrayList<ArrayList<ShopItem>>();
+    private static ArrayList<ArrayList<ShopItem>> inventory = new ArrayList<ArrayList<ShopItem>>();
 
     public Inventory() {
         houses = new ArrayList<ShopItem>();
@@ -52,21 +52,20 @@ public class Inventory {
             else if (a == specials)
                 tmp = ShopItem.getNumSpecials();
 
-            sc.nextLine();
+            if(sc.hasNextLine())
+                sc.nextLine();
             for(int i = 0; i < tmp; i++) {
                 if(sc.hasNextLine()) {
                     String line = sc.nextLine();
                     if (line.endsWith(".")) {
-                        System.out.println(line);
                         int numItems = Integer.parseInt(line.substring(0, line.indexOf("-")));
-                        System.out.println(numItems);
                         String name = line.substring(line.indexOf("-") + 1, line.indexOf("."));
-                        System.out.println(name);
                         addItemsInitialization(a, numItems, name);
                     }
                 }
             }
-            sc.nextLine();
+            if(sc.hasNextLine())
+                sc.nextLine();
         }
     }
     public static void addItemsInitialization(ArrayList<ShopItem> a, int n, String name){
@@ -123,15 +122,15 @@ public class Inventory {
     }
     public static void addShopItem(ShopItem s, String category) {
         if (category.equals("Houses")) {
-            houses.add(s);
+            houses.add(ShopItem.getShopItem(s.getName()));
         } else if (category.equals("Factories")) {
-            factories.add(s);
+            factories.add(ShopItem.getShopItem(s.getName()));
         } else if (category.equals("Farms")) {
-            farms.add(s);
+            farms.add(ShopItem.getShopItem(s.getName()));
         } else if (category.equals("Basics")) {
-            basics.add(s);
+            basics.add(ShopItem.getShopItem(s.getName()));
         } else if (category.equals("Specials")) {
-            specials.add(s);
+            specials.add(ShopItem.getShopItem(s.getName()));
         }
         update();
     }

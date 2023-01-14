@@ -270,9 +270,10 @@ public class Shop extends JPanel implements ActionListener{
                             category = "Specials";
                         }
                         try {
-                            s.purchaseItem();
-                            if(s.canBuyItem())
+                            if(s.canBuyItem()) {
+                                s.purchaseItem();
                                 Inventory.addShopItem(s, category);
+                            }
                         } catch (Exception ex) {
                             throw new RuntimeException(ex);
                         }
