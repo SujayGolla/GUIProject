@@ -22,7 +22,8 @@ public class Map extends JPanel implements MouseWheelListener{
       private boolean zoomer;
       private int zoomPointX;
       private int zoomPointY;
-    
+      private boolean zoomIn;
+  
     private char[][] map;
     private ArrayList<ShopItem> tiles;
     private Scanner sc;
@@ -70,12 +71,19 @@ public class Map extends JPanel implements MouseWheelListener{
         addMouseWheelListener(this);
         if (zoomer) {
           AffineTransform at = g2.getTransform();
-          at.translate(zoomPointX, zoomPointY);
-          at.scale(zoomFactor, zoomFactor);
-          at.translate(-zoomPointX, -zoomPointY);
-          g2.setTransform(at);
-          
+          if (zoomIn) {
+            at.translate(zoomPointX, zoomPointY);
+            at.scale(zoomFactor, zoomFactor);
+            at.translate(-zoomPointX, -zoomPointY);
+            g2.setTransform(at);
+          }
+          else {
+            at.scale(zoomFactor, zoomFactor);
+            g2.transform(at);
+          }
+          zoomer = false;
         }
+      
         for(int i = 0; i < tiles.size(); i++){
             tiles.get(i).myDraw(g);
         }
@@ -90,10 +98,12 @@ public class Map extends JPanel implements MouseWheelListener{
     zoomer = true;
     //Zoom in
     if (e.getWheelRotation() < 0) {
+      zoomIn = true;
       if (zoomFactor < 1.45)
         zoomFactor += 0.05;
     }
     else {
+      zoomIn = false;
       if (zoomFactor > 0.85)
         zoomFactor -= 0.05;
     }
