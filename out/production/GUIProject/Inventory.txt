@@ -13,6 +13,7 @@ Factories
 0-Fast Food Restaurant
 ----------
 Farms
+0-Field
 0-Cowshed
 0-Chicken Coop
 0-Sheep Farm
