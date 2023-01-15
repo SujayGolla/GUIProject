@@ -8,6 +8,7 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.*;
 import java.util.ArrayList;
+import java.util.Arrays;
 
 public class EditOptionPanel extends JPanel implements ActionListener, MouseListener, MouseMotionListener {
     private JPanel top, center, centerLeft, navBar, itemsList, map, cHou, cFac, cFar, cBas, cSpe;
@@ -141,6 +142,18 @@ public class EditOptionPanel extends JPanel implements ActionListener, MouseList
                 }
             }
         }
+    }
+    public void update(){
+        JPanel[] panels = {cHou, cFac, cFar, cBas, cSpe};
+        for(JPanel panel : panels){
+            Component[] components = panel.getComponents();
+            for(Component component : components){
+                panel.remove(component);
+            }
+            panel.revalidate();
+            panel.repaint();
+        }
+        makeItemsList();
     }
     public void defaultButtonSetup(JButton b){
         b.setBorderPainted(false);

@@ -57,9 +57,9 @@ public class Inventory {
             for(int i = 0; i < tmp; i++) {
                 if(sc.hasNextLine()) {
                     String line = sc.nextLine();
-                    if (line.endsWith(".")) {
+                    if (!line.contains("--")) {
                         int numItems = Integer.parseInt(line.substring(0, line.indexOf("-")));
-                        String name = line.substring(line.indexOf("-") + 1, line.indexOf("."));
+                        String name = line.substring(line.indexOf("-") + 1);
                         addItemsInitialization(a, numItems, name);
                     }
                 }
@@ -133,6 +133,7 @@ public class Inventory {
             specials.add(ShopItem.getShopItem(s.getName()));
         }
         update();
+        new EditOptionPanel().update();
     }
     public static ArrayList<ArrayList<ShopItem>> getInventory(){
         return inventory;
