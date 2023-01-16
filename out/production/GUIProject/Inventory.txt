@@ -5,18 +5,17 @@ Houses
 0-Condos
 ----------
 Factories
-0-Feed Mill
-0-Dairy Factory
-0-Textile Factory
-0-Meat Production
+0-Feed_Mill
+0-Dairy_Factory
+0-Textile_Factory
 0-Bakery
-0-Fast Food Restaurant
+0-Fast_Food_Restaurant
 ----------
 Farms
 0-Field
 0-Cowshed
-0-Chicken Coop
-0-Sheep Farm
+0-Chicken_Coop
+0-Sheep_Farm
 ----------
 Basics
 5-Roads
