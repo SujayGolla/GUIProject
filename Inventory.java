@@ -52,20 +52,16 @@ public class Inventory {
             else if (a == specials)
                 tmp = ShopItemTiles.getNumSpecials();
 
-            if(sc.hasNextLine())
-                sc.nextLine();
-            for(int i = 0; i < tmp; i++) {
-                if(sc.hasNextLine()) {
-                    String line = sc.nextLine();
-                    if (!line.contains("--")) {
-                        int numItems = Integer.parseInt(line.substring(0, line.indexOf("-")));
-                        String name = line.substring(line.indexOf("-") + 1);
-                        addItemsInitialization(a, numItems, name);
-                    }
-                }
+            sc.nextLine();
+            for(int i = 0; i < tmp; i++){
+                String line = sc.nextLine();
+                int numItems = Integer.parseInt(line.substring(0, line.indexOf("-")));
+                String name = line.substring(line.indexOf("-") + 1);
+                name = name.replace('_', ' ');
+                System.out.println(line + "\n" + numItems + "\n" + name);
+                addItemsInitialization(a, numItems, name);
             }
-            if(sc.hasNextLine())
-                sc.nextLine();
+            sc.nextLine();
         }
     }
     public static void addItemsInitialization(ArrayList<ShopItemTiles> a, int n, String name){
@@ -84,18 +80,17 @@ public class Inventory {
             gameData.write(specificItemCounter(houses, "Condos") + "-" + "Condos\n");
             gameData.write("----------\n");
             gameData.write("Factories" + "\n");
-            gameData.write(specificItemCounter(factories, "Feed Mill") + "-" + "Feed Mill\n");
-            gameData.write(specificItemCounter(factories, "Dairy Factory") + "-" + "Dairy Factory\n");
-            gameData.write(specificItemCounter(factories, "Textile Factory") + "-" + "Textile Factory\n");
-            gameData.write(specificItemCounter(factories, "Meat Production") + "-" + "Meat Production\n");
+            gameData.write(specificItemCounter(factories, "Feed Mill") + "-" + "Feed_Mill\n");
+            gameData.write(specificItemCounter(factories, "Dairy Factory") + "-" + "Dairy_Factory\n");
+            gameData.write(specificItemCounter(factories, "Textile Factory") + "-" + "Textile_Factory\n");
             gameData.write(specificItemCounter(factories, "Bakery") + "-" + "Bakery\n");
-            gameData.write(specificItemCounter(factories, "Fast Food Restaurant") + "-" + "Fast Food Restaurant\n");
+            gameData.write(specificItemCounter(factories, "Fast Food Restaurant") + "-" + "Fast_Food_Restaurant\n");
             gameData.write("----------\n");
             gameData.write("Farms" + "\n");
             gameData.write(specificItemCounter(farms, "Field") + "-" + "Field\n");
             gameData.write(specificItemCounter(farms, "Cowshed") + "-" + "Cowshed\n");
-            gameData.write(specificItemCounter(farms, "Chicken Coop") + "-" + "Chicken Coop\n");
-            gameData.write(specificItemCounter(farms, "Sheep Farm") + "-" + "Sheep Farm\n");
+            gameData.write(specificItemCounter(farms, "Chicken Coop") + "-" + "Chicken_Coop\n");
+            gameData.write(specificItemCounter(farms, "Sheep Farm") + "-" + "Sheep_Farm\n");
             gameData.write("----------\n");
             gameData.write("Basics" + "\n");
             gameData.write(specificItemCounter(basics, "Roads") + "-" + "Roads\n");
@@ -106,7 +101,7 @@ public class Inventory {
             gameData.write(specificItemCounter(specials, "Barn") + "-" + "Barn\n");
             gameData.write(specificItemCounter(specials, "Townhall") + "-" + "Townhall\n");
             gameData.write(specificItemCounter(specials, "Fountain") + "-" + "Fountain\n");
-            gameData.write("----------\n");
+            gameData.write("----------");
             gameData.close();
         } catch (IOException ex) {
             throw new RuntimeException(ex);
@@ -116,6 +111,14 @@ public class Inventory {
         int cnt = 0;
         for(ShopItemTiles s : a){
             if(s.getName().equals(name))
+                cnt++;
+        }
+        return cnt;
+    }
+    public static int specificItemCounter(ShopItemTiles[] a, String name){
+        int cnt = 0;
+        for(int i = 0; i < a.length; i++){
+            if(a[i].getName().equals(name))
                 cnt++;
         }
         return cnt;
