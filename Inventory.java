@@ -18,6 +18,7 @@ public class Inventory {
     private static ArrayList<ShopItemTiles> basics;
     private static ArrayList<ShopItemTiles> specials;
     private static ArrayList<ArrayList<ShopItemTiles>> inventory = new ArrayList<ArrayList<ShopItemTiles>>();
+    private static int cnt = 0;
 
     public Inventory() {
         houses = new ArrayList<ShopItemTiles>();
@@ -38,7 +39,8 @@ public class Inventory {
         } catch (FileNotFoundException e) {
             System.out.println(e);
         }
-
+        cnt++;
+        System.out.println(cnt);
         for(ArrayList<ShopItemTiles> a : inventory) {
             int tmp = 0;
             if(a == houses)
@@ -58,7 +60,7 @@ public class Inventory {
                 int numItems = Integer.parseInt(line.substring(0, line.indexOf("-")));
                 String name = line.substring(line.indexOf("-") + 1);
                 name = name.replace('_', ' ');
-                System.out.println(line + "\n" + numItems + "\n" + name);
+                System.out.println(i + " "+line + " " + numItems + " " + name);
                 addItemsInitialization(a, numItems, name);
             }
             sc.nextLine();

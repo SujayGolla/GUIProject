@@ -48,21 +48,21 @@ public class BarnItem extends ShopItemTiles{
         }
         return null;
     }
-//    public boolean canBuyItem(){
-//        ArrayList<ArrayList<ShopItemTiles>> inventory = Inventory.getInventory();
-//        for(ShopItemTiles s : requirements){
-//            boolean found = false;
-//            myLabel:
-//            for(ArrayList<ShopItemTiles> a : inventory){
-//                for (ShopItemTiles item : a){
-//                    if(item.getName().equals(s.getName())) {
-//                        found = true;
-//
-//                        break myLabel;
-//                    }
-//                }
-//            }
-//        }
-//        return true;
-//    }
+    public boolean canBuyItem(){
+        ArrayList<ArrayList<ShopItemTiles>> inventory = Inventory.getInventory();
+        for(ShopItemTiles s : requirements){
+            boolean found = false;
+            myLabel:
+            for(ArrayList<ShopItemTiles> a : inventory){
+                for (ShopItemTiles item : a){
+                    if(item.getName().equals(s.getName())) {
+                        found = true;
+
+                        break myLabel;
+                    }
+                }
+            }
+        }
+        return true;
+    }
 }
