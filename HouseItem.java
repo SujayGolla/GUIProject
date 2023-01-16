@@ -6,7 +6,7 @@ Teacher: Ms.Strelkovska
 
 import javax.swing.*;
 
-public class HouseItem extends ShopItem{
+public class HouseItem extends ShopItemTiles {
     private final int ppl;
     private static final String houses = "Bungalow, Townhouse, Apartment, Condos";
     public HouseItem(String name, int price, ImageIcon img, ImageIcon[] animations, int unlockLVL, int ppl) {

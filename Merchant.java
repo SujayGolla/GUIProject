@@ -6,14 +6,12 @@ Teacher: Ms.Strelkovska
 
 import javax.swing.*;
 import java.awt.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 
 public class Merchant extends JPanel  {
 
   private int random;
   private String[] items;
-  private ShopItem item;
+  private ShopItemTiles item;
   private int cnt;
   private JPanel top;
   private JButton back;
@@ -24,12 +22,12 @@ public class Merchant extends JPanel  {
     random = (int) (Math.random()*8);
     items = new String[] {"Wheat", "Carrot", "Corn", "Tomatoes", "Rice", "Apples", "Strawberry", "Cotton"};
     
-    item = ShopItem.getShopItem(items[random]);
+    item = ShopItemTiles.getShopItem(items[random]);
     cnt = 0;
     displaySellableItem(item, 50, 50);
 
     random = (int) (Math.random()*8);
-    item = ShopItem.getShopItem(items[random]);
+    item = ShopItemTiles.getShopItem(items[random]);
     displaySellableItem(item, 50, 50);
     
     back = new JButton(new ImageIcon("back.png"));
@@ -52,7 +50,7 @@ public class Merchant extends JPanel  {
     this.add(top, BorderLayout.NORTH);
   }
 
-  public void displaySellableItem(ShopItem s, int x, int y){
+  public void displaySellableItem(ShopItemTiles s, int x, int y){
     JPanel p = new JPanel();
     p.setLayout(null);
     Dimension sizeTitle,sizePrice;

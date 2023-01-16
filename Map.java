@@ -6,7 +6,6 @@ Teacher: Ms.Strelkovska
 
 import javax.swing.*;
 import java.awt.*;
-import java.awt.event.*;
 import java.io.File;
 import java.util.ArrayList;
 import java.util.Scanner;
@@ -25,9 +24,9 @@ public class Map extends JPanel implements MouseWheelListener{
       private boolean zoomIn;
   
     private char[][] map;
-    private ArrayList<ShopItem> tiles;
+    private ArrayList<ShopItemTiles> tiles;
     private Scanner sc;
-    private ShopItem currentItem = null;
+    private ShopItemTiles currentItem = null;
     public Map(){
         try {
             sc = new Scanner(new File("Map.txt"));
@@ -37,7 +36,7 @@ public class Map extends JPanel implements MouseWheelListener{
             System.out.println(e);
         }
         map = new char[20][40];
-        tiles = new ArrayList<ShopItem>();
+        tiles = new ArrayList<ShopItemTiles>();
         for(int i = 0; i < map.length; i++){
             for(int j= 0; j < map[i].length; j++){
                 map[i][j] = sc.next().charAt(0);
@@ -50,9 +49,9 @@ public class Map extends JPanel implements MouseWheelListener{
                 }
             }
         }
-        ArrayList<ArrayList<ShopItem>> inventory = Inventory.getInventory();
-        for(ArrayList<ShopItem> a : inventory){
-            for(ShopItem s : a){
+        ArrayList<ArrayList<ShopItemTiles>> inventory = Inventory.getInventory();
+        for(ArrayList<ShopItemTiles> a : inventory){
+            for(ShopItemTiles s : a){
                 if(s.getX() != -1 && s.getY() != -1){
                     tiles.add(s);
                 }
@@ -60,7 +59,7 @@ public class Map extends JPanel implements MouseWheelListener{
         }
     }
     public void addToTiles(String name, int i, int j){
-        ShopItem s = ShopItem.getShopItem(name);
+        ShopItemTiles s = ShopItemTiles.getShopItem(name);
         s.setX(j*30);
         s.setY(i*30);
         tiles.add(s);

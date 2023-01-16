@@ -16,9 +16,9 @@ import java.util.Scanner;
 
 public class Edit extends JPanel implements MouseMotionListener, MouseListener {
     private char[][] map;
-    private ArrayList<ShopItem> tiles;
+    private ArrayList<ShopItemTiles> tiles;
     private Scanner sc;
-    private ShopItem currentItem = null;
+    private ShopItemTiles currentItem = null;
     public Edit(){
         try {
             sc = new Scanner(new File("Map.txt"));
@@ -26,7 +26,7 @@ public class Edit extends JPanel implements MouseMotionListener, MouseListener {
             System.out.println(e);
         }
         map = new char[20][40];
-        tiles = new ArrayList<ShopItem>();
+        tiles = new ArrayList<ShopItemTiles>();
         for(int i = 0; i < map.length; i++){
             for(int j= 0; j < map[i].length; j++){
                 map[i][j] = sc.next().charAt(0);
@@ -39,9 +39,9 @@ public class Edit extends JPanel implements MouseMotionListener, MouseListener {
                 }
             }
         }
-        ArrayList<ArrayList<ShopItem>> inventory = Inventory.getInventory();
-        for(ArrayList<ShopItem> a : inventory){
-            for(ShopItem s : a){
+        ArrayList<ArrayList<ShopItemTiles>> inventory = Inventory.getInventory();
+        for(ArrayList<ShopItemTiles> a : inventory){
+            for(ShopItemTiles s : a){
                 if(s.isPlaced()){
                     tiles.add(s);
                 }
@@ -51,7 +51,7 @@ public class Edit extends JPanel implements MouseMotionListener, MouseListener {
         addMouseMotionListener(this);
     }
     public void addToTiles(String name, int i, int j){
-        ShopItem s = ShopItem.getShopItem(name);
+        ShopItemTiles s = ShopItemTiles.getShopItem(name);
         s.setX(j*30);
         s.setY(i*30);
         tiles.add(s);

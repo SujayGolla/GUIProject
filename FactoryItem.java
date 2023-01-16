@@ -7,7 +7,7 @@ Teacher: Ms.Strelkovska
 import javax.swing.*;
 import java.awt.*;
 
-public class FactoryItem extends ShopItem{
+public class FactoryItem extends ShopItemTiles {
     private int reqPpl;
     private final int size = 60;
     private static final String factories = "Feed Mill, Dairy Factory, Textile Factory, Meat Production, Bakery, Fast Food Restaurant";

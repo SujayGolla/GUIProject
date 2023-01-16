@@ -8,49 +8,49 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileWriter;
 import java.io.IOException;
-import java.sql.SQLOutput;
 import java.util.ArrayList;
 import java.util.Scanner;
 
 public class Inventory {
-    private static ArrayList<ShopItem> houses;
-    private static ArrayList<ShopItem> factories;
-    private static ArrayList<ShopItem> farms;
-    private static ArrayList<ShopItem> basics;
-    private static ArrayList<ShopItem> specials;
-    private static ArrayList<ArrayList<ShopItem>> inventory = new ArrayList<ArrayList<ShopItem>>();
+    private static ArrayList<ShopItemTiles> houses;
+    private static ArrayList<ShopItemTiles> factories;
+    private static ArrayList<ShopItemTiles> farms;
+    private static ArrayList<ShopItemTiles> basics;
+    private static ArrayList<ShopItemTiles> specials;
+    private static ArrayList<ArrayList<ShopItemTiles>> inventory = new ArrayList<ArrayList<ShopItemTiles>>();
 
     public Inventory() {
-        houses = new ArrayList<ShopItem>();
+        houses = new ArrayList<ShopItemTiles>();
         inventory.add(houses);
-        factories = new ArrayList<ShopItem>();
+        factories = new ArrayList<ShopItemTiles>();
         inventory.add(factories);
-        farms = new ArrayList<ShopItem>();
+        farms = new ArrayList<ShopItemTiles>();
         inventory.add(farms);
-        basics = new ArrayList<ShopItem>();
+        basics = new ArrayList<ShopItemTiles>();
         inventory.add(basics);
-        specials = new ArrayList<ShopItem>();
+        specials = new ArrayList<ShopItemTiles>();
         inventory.add(specials);
 
         Scanner sc = null;
         try {
             sc = new Scanner(new File("Inventory.txt"));
+            new ShopItemTiles();
         } catch (FileNotFoundException e) {
             System.out.println(e);
         }
 
-        for(ArrayList<ShopItem> a : inventory) {
+        for(ArrayList<ShopItemTiles> a : inventory) {
             int tmp = 0;
             if(a == houses)
-                tmp = ShopItem.getNumHouses();
+                tmp = ShopItemTiles.getNumHouses();
             else if (a == factories)
-                tmp = ShopItem.getNumFactories();
+                tmp = ShopItemTiles.getNumFactories();
             else if (a == farms)
-                tmp = ShopItem.getNumFarms();
+                tmp = ShopItemTiles.getNumFarms();
             else if (a == basics)
-                tmp = ShopItem.getNumBasics();
+                tmp = ShopItemTiles.getNumBasics();
             else if (a == specials)
-                tmp = ShopItem.getNumSpecials();
+                tmp = ShopItemTiles.getNumSpecials();
 
             if(sc.hasNextLine())
                 sc.nextLine();
@@ -68,9 +68,9 @@ public class Inventory {
                 sc.nextLine();
         }
     }
-    public static void addItemsInitialization(ArrayList<ShopItem> a, int n, String name){
+    public static void addItemsInitialization(ArrayList<ShopItemTiles> a, int n, String name){
         for(int i = 0; i < n; i++){
-            a.add(ShopItem.getShopItem(name));
+            a.add(ShopItemTiles.getShopItem(name));
         }
     }
     public static void update(){
@@ -112,30 +112,30 @@ public class Inventory {
             throw new RuntimeException(ex);
         }
     }
-    public static int specificItemCounter(ArrayList<ShopItem> a, String name){
+    public static int specificItemCounter(ArrayList<ShopItemTiles> a, String name){
         int cnt = 0;
-        for(ShopItem s : a){
+        for(ShopItemTiles s : a){
             if(s.getName().equals(name))
                 cnt++;
         }
         return cnt;
     }
-    public static void addShopItem(ShopItem s, String category) {
+    public static void addShopItem(ShopItemTiles s, String category) {
         if (category.equals("Houses")) {
-            houses.add(ShopItem.getShopItem(s.getName()));
+            houses.add(ShopItemTiles.getShopItem(s.getName()));
         } else if (category.equals("Factories")) {
-            factories.add(ShopItem.getShopItem(s.getName()));
+            factories.add(ShopItemTiles.getShopItem(s.getName()));
         } else if (category.equals("Farms")) {
-            farms.add(ShopItem.getShopItem(s.getName()));
+            farms.add(ShopItemTiles.getShopItem(s.getName()));
         } else if (category.equals("Basics")) {
-            basics.add(ShopItem.getShopItem(s.getName()));
+            basics.add(ShopItemTiles.getShopItem(s.getName()));
         } else if (category.equals("Specials")) {
-            specials.add(ShopItem.getShopItem(s.getName()));
+            specials.add(ShopItemTiles.getShopItem(s.getName()));
         }
         update();
         new EditOptionPanel().update();
     }
-    public static ArrayList<ArrayList<ShopItem>> getInventory(){
+    public static ArrayList<ArrayList<ShopItemTiles>> getInventory(){
         return inventory;
     }
 }

@@ -14,13 +14,13 @@ public class Shop extends JPanel implements ActionListener{
     private JPanel n, c;
     private JButton factories, houses, farming, basics, special, crops, back;
     private CardLayout layout;
-    private final ShopItem[] housesArray = {ShopItem.getShopItem("Bungalow"), ShopItem.getShopItem("Townhouse"), ShopItem.getShopItem("Apartment"), ShopItem.getShopItem("Condos")};
-    private final ShopItem[] factoriesArray = {ShopItem.getShopItem("Feed Mill"), ShopItem.getShopItem("Dairy Factory"), ShopItem.getShopItem("Textile Factory"), ShopItem.getShopItem("Meat Production"), ShopItem.getShopItem("Bakery"), ShopItem.getShopItem("Fast Food Restaurant")};
-    private final ShopItem[] farmsArray = {ShopItem.getShopItem("Field"), ShopItem.getShopItem("Cowshed"), ShopItem.getShopItem("Chicken Coop"), ShopItem.getShopItem("Sheep Farm")};
-    private final ShopItem[] cropsArray = {ShopItem.getShopItem("Wheat"), ShopItem.getShopItem("Carrot"), ShopItem.getShopItem("Corn"), ShopItem.getShopItem("Tomatoes"), ShopItem.getShopItem("Rice"), ShopItem.getShopItem("Apples"), ShopItem.getShopItem("Strawberry"), ShopItem.getShopItem("Cotton")};
-    private final ShopItem[] basicsArray = {ShopItem.getShopItem("Roads"), ShopItem.getShopItem("Gravel"), ShopItem.getShopItem("Tiles")};
-    private final ShopItem[] specialsArray = {ShopItem.getShopItem("Barn"), ShopItem.getShopItem("Townhall"), ShopItem.getShopItem("Fountain")};
-    private final ShopItem[][] shop = {housesArray, factoriesArray, farmsArray, cropsArray, basicsArray, specialsArray};
+    private final ShopItemTiles[] housesArray = {ShopItemTiles.getShopItem("Bungalow"), ShopItemTiles.getShopItem("Townhouse"), ShopItemTiles.getShopItem("Apartment"), ShopItemTiles.getShopItem("Condos")};
+    private final ShopItemTiles[] factoriesArray = {ShopItemTiles.getShopItem("Feed Mill"), ShopItemTiles.getShopItem("Dairy Factory"), ShopItemTiles.getShopItem("Textile Factory"), ShopItemTiles.getShopItem("Bakery"), ShopItemTiles.getShopItem("Fast Food Restaurant")};
+    private final ShopItemTiles[] farmsArray = {ShopItemTiles.getShopItem("Field"), ShopItemTiles.getShopItem("Cowshed"), ShopItemTiles.getShopItem("Chicken Coop"), ShopItemTiles.getShopItem("Sheep Farm")};
+    private final ShopItemTiles[] cropsArray = {ShopItemTiles.getShopItem("Wheat"), ShopItemTiles.getShopItem("Carrot"), ShopItemTiles.getShopItem("Corn"), ShopItemTiles.getShopItem("Tomatoes"), ShopItemTiles.getShopItem("Rice"), ShopItemTiles.getShopItem("Apples"), ShopItemTiles.getShopItem("Strawberry"), ShopItemTiles.getShopItem("Cotton")};
+    private final ShopItemTiles[] basicsArray = {ShopItemTiles.getShopItem("Roads"), ShopItemTiles.getShopItem("Gravel"), ShopItemTiles.getShopItem("Tiles")};
+    private final ShopItemTiles[] specialsArray = {ShopItemTiles.getShopItem("Barn"), ShopItemTiles.getShopItem("Townhall"), ShopItemTiles.getShopItem("Fountain")};
+    private final ShopItemTiles[][] shop = {housesArray, factoriesArray, farmsArray, cropsArray, basicsArray, specialsArray};
     private int cnt = 0;
     public Shop(){
         this.setLayout(new BorderLayout());
@@ -123,9 +123,9 @@ public class Shop extends JPanel implements ActionListener{
         scrollPaneCSpe.setPreferredSize(new Dimension(3500, 350));
         c.add(scrollPaneCSpe, "Specials");
     }
-    public void addShopItemsToPanels(JPanel p, ShopItem[] array){
+    public void addShopItemsToPanels(JPanel p, ShopItemTiles[] array){
         p.add(new JLabel(new ImageIcon("Untitled(1).png")));
-        for(ShopItem i : array){
+        for(ShopItemTiles i : array){
             if(i != null) {
                 if (i.isUnlocked()) {
                     displayUnlockedItems(i, p, 30, 25);
@@ -141,7 +141,7 @@ public class Shop extends JPanel implements ActionListener{
     public void paintComponent(Graphics g){
         super.paintComponent(g);
     }
-    public void displayUnlockedItems(ShopItem s, JPanel panel, int x, int y){
+    public void displayUnlockedItems(ShopItemTiles s, JPanel panel, int x, int y){
         JPanel p = new JPanel();
         p.setLayout(null);
         Dimension sizeTitle,sizePrice, sizeBuy;
@@ -191,7 +191,7 @@ public class Shop extends JPanel implements ActionListener{
 
         panel.add(p);
     }
-    public void displayLockedItems(ShopItem s, JPanel panel, int x, int y){
+    public void displayLockedItems(ShopItemTiles s, JPanel panel, int x, int y){
         JPanel p = new JPanel();
         p.setLayout(null);
         Dimension sizeTitle,sizePrice;
@@ -254,8 +254,8 @@ public class Shop extends JPanel implements ActionListener{
         else if(b == crops)
             centerFlipToCard("Crops");
         else {
-            for(ShopItem[] a : shop){
-                for(ShopItem s : a){
+            for(ShopItemTiles[] a : shop){
+                for(ShopItemTiles s : a){
                     if (name.startsWith(s.getName())) {
                         String category = "";
                         if (Arrays.equals(a, housesArray)) {

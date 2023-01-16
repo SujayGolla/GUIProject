@@ -7,7 +7,7 @@ Teacher: Ms.Strelkovska
 import javax.swing.*;
 import java.awt.*;
 
-public class ShopItem {
+public class ShopItemTiles {
     protected final String name;
     protected final int price;
     protected ImageIcon img;
@@ -15,7 +15,7 @@ public class ShopItem {
     protected final int unlockLVL;
     protected int x = -1;
     protected int y = -1;
-    protected static final int numFactories = 6;
+    protected static final int numFactories = 5;
     protected static final int numHouses = 4;
     protected static final int numFarms = 4;
     protected static final int numCrops = 7;
@@ -23,7 +23,7 @@ public class ShopItem {
     protected static final int numSpecials = 3;
     protected final int size = 30;
 
-    public ShopItem(String name, int price, ImageIcon img, ImageIcon[] animations, int unlockLVL){
+    public ShopItemTiles(String name, int price, ImageIcon img, ImageIcon[] animations, int unlockLVL){
         try {
             new Game();
         } catch (Exception e) {
@@ -36,7 +36,7 @@ public class ShopItem {
         this.unlockLVL = unlockLVL;
     }
 
-    public ShopItem(String name, ImageIcon img, ImageIcon[] sprites){
+    public ShopItemTiles(String name, ImageIcon img, ImageIcon[] sprites){
         try {
             new Game();
         } catch (Exception e) {
@@ -46,6 +46,14 @@ public class ShopItem {
         this.price = 0;
         this.img = img;
         this.animations = sprites;
+        this.unlockLVL = 0;
+    }
+
+    public ShopItemTiles(){
+        this.name = null;
+        this.price = 0;
+        this.img = null;
+        this.animations = null;
         this.unlockLVL = 0;
     }
 
@@ -149,11 +157,11 @@ public class ShopItem {
     public boolean isOnTile(int mouseX, int mouseY){
         return (x <= mouseX && mouseX <= x+30 && y <= mouseY && mouseY <= y+30);
     }
-    public void replaceTile(ShopItem other){
+    public void replaceTile(ShopItemTiles other){
         x = other.x;
         y = other.y;
     }
-    public static ShopItem getShopItem(String name){
+    public static ShopItemTiles getShopItem(String name){
         if (name.equals("Townhouse")) {
             return new HouseItem("Townhouse", 50, new ImageIcon("Townhouse.png"), null, 2, 15);
         } else if (name.equals("Bungalow")) {
@@ -168,8 +176,6 @@ public class ShopItem {
             return new FactoryItem("Dairy Factory", 50, new ImageIcon("Dairy.png"), null, 2, 25);
         } else if (name.equals("Textile Factory")) {
             return new FactoryItem("Textile Factory", 100, new ImageIcon("Textile.png"), null, 4, 50);
-        } else if (name.equals("Meat Production")) {
-            return new FactoryItem("Meat Production", 150, new ImageIcon("Meat.png"), null, 5, 70);
         } else if (name.equals("Bakery")) {
             return new FactoryItem("Bakery", 200, new ImageIcon("Bakery.png"), null, 7, 100);
         } else if (name.equals("Fast Food Restaurant")) {
@@ -183,33 +189,35 @@ public class ShopItem {
         } else if (name.equals("Sheep Farm")) {
             return new FarmItem("Sheep Farm", 300, new ImageIcon("Sheep.png"), null, 5, 65);
         } else if (name.equals("Wheat")) {
-            return new ShopItem("Wheat", 5, new ImageIcon("Wheat.png"), null, 1);
+            return new ShopItemTiles("Wheat", 5, new ImageIcon("Wheat.png"), null, 1);
         } else if (name.equals("Carrot")) {
-            return new ShopItem("Carrot", 5, new ImageIcon("Carrot.png"), null, 1);
+            return new ShopItemTiles("Carrot", 5, new ImageIcon("Carrot.png"), null, 1);
         } else if (name.equals("Corn")) {
-            return new ShopItem("Corn", 5, new ImageIcon("Corn.png"), null, 2);
+            return new ShopItemTiles("Corn", 5, new ImageIcon("Corn.png"), null, 2);
         } else if (name.equals("Rice")) {
-            return new ShopItem("Rice", 5, new ImageIcon("Rice.png"), null, 4);
+            return new ShopItemTiles("Rice", 5, new ImageIcon("Rice.png"), null, 4);
         } else if (name.equals("Apples")) {
-            return new ShopItem("Apples", 10, new ImageIcon("Apple.png"), null, 5);
+            return new ShopItemTiles("Apples", 10, new ImageIcon("Apple.png"), null, 5);
         } else if (name.equals("Strawberry")) {
-            return new ShopItem("Strawberry", 10, new ImageIcon("Strawberry.png"), null, 6);
+            return new ShopItemTiles("Strawberry", 10, new ImageIcon("Strawberry.png"), null, 6);
         } else if (name.equals("Cotton")) {
-            return new ShopItem("Cotton", 5, new ImageIcon("Cotton.png"), null, 2);
+            return new ShopItemTiles("Cotton", 5, new ImageIcon("Cotton.png"), null, 2);
         } else if (name.equals("Tomatoes")) {
-            return new ShopItem("Tomatoes", 5, new ImageIcon("Tomato.png"), null, 3);
+            return new ShopItemTiles("Tomatoes", 5, new ImageIcon("Tomato.png"), null, 3);
+        } else if (name.equals("Potatoes")){
+            return new ShopItemTiles("Potatoes", 5, new ImageIcon("Potato.png"), null, 3);
         } else if (name.equals("Roads")) {
-            return new ShopItem("Roads", 0, new ImageIcon("Road.png"), null, 1);
+            return new ShopItemTiles("Roads", 0, new ImageIcon("Road.png"), null, 1);
         } else if (name.equals("Gravel")) {
-            return new ShopItem("Gravel", 0, new ImageIcon("Gravel.png"), null, 1);
+            return new ShopItemTiles("Gravel", 0, new ImageIcon("Gravel.png"), null, 1);
         } else if (name.equals("Tiles")) {
-            return new ShopItem("Tiles", 0, new ImageIcon("Tiles.png"), null, 1);
+            return new ShopItemTiles("Tiles", 0, new ImageIcon("Tiles.png"), null, 1);
         } else if (name.equals("Barn")) {
-            return new ShopItem("Barn", 0, new ImageIcon("Barn.png"), null, 1);
+            return new ShopItemTiles("Barn", 0, new ImageIcon("Barn.png"), null, 1);
         } else if (name.equals("Townhall")) {
-            return new ShopItem("Townhall", 0, new ImageIcon("Townhall.png"), null, 2);
+            return new ShopItemTiles("Townhall", 0, new ImageIcon("Townhall.png"), null, 2);
         } else if (name.equals("Fountain")) {
-            return new ShopItem("Fountain", 200, new ImageIcon("Fountain.png"), null, 3);
+            return new ShopItemTiles("Fountain", 200, new ImageIcon("Fountain.png"), null, 3);
         } else if (name.equals("Grass")) {
             return new SpecialTiles("Grass", new ImageIcon("grass.png"));
         } else if (name.equals("Water")) {

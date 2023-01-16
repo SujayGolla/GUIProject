@@ -6,7 +6,7 @@ Teacher: Ms.Strelkovska
 
 import javax.swing.*;
 
-public class SpecialTiles extends ShopItem{
+public class SpecialTiles extends ShopItemTiles {
     public SpecialTiles(String name, ImageIcon img, ImageIcon[] sprites) {
         super(name, img, sprites);
         if(sprites != null)

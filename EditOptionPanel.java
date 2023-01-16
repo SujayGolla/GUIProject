@@ -8,7 +8,6 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.*;
 import java.util.ArrayList;
-import java.util.Arrays;
 
 public class EditOptionPanel extends JPanel implements ActionListener, MouseListener, MouseMotionListener {
     private JPanel top, center, centerLeft, navBar, itemsList, map, cHou, cFac, cFar, cBas, cSpe;
@@ -63,23 +62,23 @@ public class EditOptionPanel extends JPanel implements ActionListener, MouseList
         
         layout = new CardLayout();
         itemsList = new JPanel(layout);
-        cHou = new JPanel(new GridLayout(ShopItem.getNumHouses()+1, 1));
+        cHou = new JPanel(new GridLayout(ShopItemTiles.getNumHouses()+1, 1));
         JLabel l = new JLabel("List of Houses", JLabel.CENTER);
         l.setFont(new Font("Times New Roman", Font.BOLD, 18));
         cHou.add(l);
-        cFac = new JPanel(new GridLayout(ShopItem.getNumFactories()+1, 1));
+        cFac = new JPanel(new GridLayout(ShopItemTiles.getNumFactories()+1, 1));
         l = new JLabel("List of Factories", JLabel.CENTER);
         l.setFont(new Font("Times New Roman", Font.BOLD, 18));
         cFac.add(l);
-        cFar = new JPanel(new GridLayout(ShopItem.getNumFarms()+1, 1));
+        cFar = new JPanel(new GridLayout(ShopItemTiles.getNumFarms()+1, 1));
         l = new JLabel("List of Farms", JLabel.CENTER);
         l.setFont(new Font("Times New Roman", Font.BOLD, 18));
         cFar.add(l);
-        cBas = new JPanel(new GridLayout(ShopItem.getNumBasics()+1, 1));
+        cBas = new JPanel(new GridLayout(ShopItemTiles.getNumBasics()+1, 1));
         l = new JLabel("List of Basics", JLabel.CENTER);
         l.setFont(new Font("Times New Roman", Font.BOLD, 18));
         cBas.add(l);
-        cSpe = new JPanel(new GridLayout(ShopItem.getNumSpecials()+1, 1));
+        cSpe = new JPanel(new GridLayout(ShopItemTiles.getNumSpecials()+1, 1));
         l = new JLabel("List of Specials", JLabel.CENTER);
         l.setFont(new Font("Times New Roman", Font.BOLD, 18));
         cSpe.add(l);
@@ -111,12 +110,12 @@ public class EditOptionPanel extends JPanel implements ActionListener, MouseList
         this.add(center, BorderLayout.CENTER);
     }
     public void makeItemsList(){
-        ArrayList<ArrayList<ShopItem>> inventory = Inventory.getInventory();
+        ArrayList<ArrayList<ShopItemTiles>> inventory = Inventory.getInventory();
         JPanel[] panels = {cHou, cFac, cFar, cBas, cSpe};
         for(int i = 0; i < panels.length; i++){
             JPanel p = panels[i];
             String onPanel = "";
-            for(ShopItem s : inventory.get(i)){
+            for(ShopItemTiles s : inventory.get(i)){
                 if(!onPanel.contains(s.getName()) && !s.isPlaced()){
                     JPanel panel = new JPanel(null);
 
@@ -142,6 +141,7 @@ public class EditOptionPanel extends JPanel implements ActionListener, MouseList
                 }
             }
         }
+        repaint();
     }
     public void update(){
         JPanel[] panels = {cHou, cFac, cFar, cBas, cSpe};
@@ -187,6 +187,9 @@ public class EditOptionPanel extends JPanel implements ActionListener, MouseList
         Image image = img.getImage();
         Image newImg = image.getScaledInstance(w, h,  java.awt.Image.SCALE_SMOOTH);
         return new ImageIcon(newImg);
+    }
+    public void paintComponent(Graphics g){
+        super.paintComponent(g);
     }
 
     @Override

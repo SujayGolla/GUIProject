@@ -7,7 +7,7 @@ Teacher: Ms.Strelkovska
 import javax.swing.*;
 import java.awt.*;
 
-public class FarmItem extends ShopItem{
+public class FarmItem extends ShopItemTiles {
     private int reqPpl;
     private final int size = 60;
     private static final String farms = "Field, Cowshed, Chicken Coop, Sheep Farm";
