@@ -4,7 +4,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 public class Homepage extends JPanel implements ActionListener {
-    private JButton shop, inventoryBtn;
+    private JButton shop, inventoryBtn, factoryBtn;
     private JPanel top, center, bottom;
     public Homepage(){
         this.setLayout(new BorderLayout());
@@ -32,7 +32,13 @@ public class Homepage extends JPanel implements ActionListener {
         inventoryBtn.setContentAreaFilled(false);
         inventoryBtn.setOpaque(false);
         inventoryBtn.addActionListener(this);
-        bottom.add(inventoryBtn, BorderLayout.WEST);
+
+        factoryBtn = new JButton(new ImageIcon("factory.png"));
+        factoryBtn.setBorderPainted(false);
+        factoryBtn.setContentAreaFilled(false);
+        factoryBtn.setOpaque(false);
+        factoryBtn.addActionListener(this);
+        bottom.add(factoryBtn BorderLayout.WEST);
         this.add(bottom, BorderLayout.SOUTH);
     }
 
@@ -67,5 +73,7 @@ public class Homepage extends JPanel implements ActionListener {
             Cards.flipToCard("Shop");
         else if(e.getSource() == inventoryBtn)
             Cards.flipToCard("Inventory");
+        else if(e.getSource()) == factoryBtn)
+            Cards.flipToCard("Factory");
     }
 }
